@@ -1,0 +1,26 @@
+EC2
+IAM:STS
+KMS
+EBS
+SNAP
+ELB
+EFS
+VPC
+LAMBDA
+VPC:IG
+VPC:RT
+VPC:SUB
+EC
+S3
+AWS
+IAM
+APIG
+CF as CloudFormation
+EB as Elastic Beranstalk
+DYNAMO
+COGNITO
+KMS
+53
+SNS
+SQS
+SWF
