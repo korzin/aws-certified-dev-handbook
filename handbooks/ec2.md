@@ -52,6 +52,20 @@ You can select an AMI to use based on the following characteristics:
 
 ![Shared responsibility model][https://d1.awsstatic.com/security-center/Shared_Responsibility_Model_V2.59d1eccec334b366627e9295b304202faf7b899b.jpg]
 
+With the AWS Shared Responsibility Model, the security implementation of a customer’s infrastructure 
+is shared between AWS and the customer. AWS is responsible for the global security “of” the cloud, 
+which in practice means, protecting the underlying infrastructure (network, hardware, software, and 
+facilities) from vulnerabilities, fraud, abuse, and intrusions, and providing customers with the 
+necessary security capabilities.
+
+On the other hand, the customer is responsible for security “in” the cloud, which 
+means, the security of their content, applications, platform, operating systems, and networks.
+ While AWS offers you several security tools to help you with security, such as CloudTrail, Security 
+ Groups, and IAM, their implementation is optional. Customers have the control to choose what security
+  they want to implement to protect their IT infrastructure. Therefore, it’s important that customers 
+  carefully consider the services they select because their responsibility is determined by the AWS 
+  Cloud Services they choose.
+
 ### Network and Security
 
 If an instance fails and you launch a replacement instance, the replacement has a different public IP address than the original. However, if your application needs a static IP address, you can use an Elastic IP address.
