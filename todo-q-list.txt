@@ -115,7 +115,7 @@
         SQS:R  >>  SQS message formats and properties
         SQS:M  >>  SQS message retained: 14 days  ,SQS message: 256 KB of text in any format (10 items max)  ,SQS timeout: 30 seconds (default) 12 hours (max)  ,SQS long polling: 20 seconds(default/max) 1 sec(min)  ,SQS is PCI DSS certified  ,SQS/SNS visibility: ChangeMessageVisiblity  ,SQS/SNS delete: DeleteMessage
         SQS:R  >>  Basic SQS functionality, Protocols used and ,Long Polling ,Max Visibility timeout scenario Questions
-
+        SQS:R  >>  DelaySeconds
         EFS:M  >>  The storage capacity will increase and decrease as you add or remove foles
         EFS:M  >>  Benefits of EFS: * Can be accessed by multiple EC2I at the same time, * Multiple EC2I can access same data, * Can be mounted to on-premise servers(see AWS Direct Connect) , * Allow migrate data to and from on-oremice servers, * Can scale on petabytes in size, maintaining law latency, * Only pay for what you use
         EFS:M  >>  You can mount EFS to EC2 on creation(like EBS volumes), but you can connect it via CLI when you connected to instance through SSH or using User Data script
