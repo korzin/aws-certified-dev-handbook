@@ -547,7 +547,7 @@ the following types of data are encrypted:
 * All snapshots created from the volume
 * All volumes created from those snapshots
 
-EBS encrypts your volume with a data key using the **industry-standard AES-256** algorithm.
+EBS encrypts your volume with a data key using the **industry-standard AES-256**(AES-256-XTS) algorithm.
 
 Amazon EBS encryption uses AWS Key Management Service (AWS KMS) customer master keys (CMKs) when creating encrypted volumes and any snapshots created from them. A unique AWS-managed CMK is created for you automatically in each region where you store AWS assets. This key is used for Amazon EBS encryption unless you specify a customer-managed CMK that you created separately using AWS KMS.
 
