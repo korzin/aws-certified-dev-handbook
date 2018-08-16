@@ -195,7 +195,7 @@
         AWS:R  >>  DIff SG vs ACL
 
         IAM:M  >>  IAM do not restrict rrafic, it restrict API calls and actions
-
+        LAMBDA  >>  Debugging and common errors
         AWS:M  >>  Ping utility use ICMP protocol
         AWS:R  >>  When to use which: SSL over web, VPN for IPSec, Direct connect, Import/Export
         AWS:M  >>  If you will be asked about which services can store enrypted data,  you have to look from speed perspective. If service built to provide high performance then it doesn't store encrypted data. There are 5 answers and i'll mark three right from them : EBS volumes (+) , S3(+), Inctance stored volumes(-) , Redshift (+) ,  DynamoDb(-)  , ElasticCache (-)
@@ -219,8 +219,13 @@
         ELB:R  >>  Sticky-sessions with ELB
         AWS:M  >>   400 - Server does not understand the request. (MissingAction, MissingParameter, incompleteSignature, invalidParameterValue, incompleteBody)  403 - forbidden (Ex: AccessDenied, InvalidClientTokenID, MalformedQueryString, invalidObjectState)  404 - The page URL request cannot be found due to the Server Down Time or Broken Links. (Ex: NoSuchBucket, NoSuchVersion,NoBucketPolicy)  409-  BucketAlreadyExists,InvalidBucketState,BucketNotEmpty,OperationAborted,RestoreAlreadyInProgress
         AWS:M  >>  SDK default region Default region (us-east-1)
-
+        LAMBDA  >>  Split traffic between two different vertion of lambda finction
         AWS:R  >>  One guy wrote sume dump from exam. I didn't get it: its like two Q, or only one Q ::::: Elastic Cache to avoid the session state problem
         SWF:R  >>  Basic Functionality Scenario Based(like what all the functionally used by SWF
         AWS:R >> CloudFront
-
+        LAMBDA:M  >> Lambda allows you to upload code and dependencies for function packages: 1) From a zip file in AWS S3  2)  Uploaded directly from elsewhere
+        LAMBDA:R  >> Common limits. e.g. Max exec duration is 5min
+        LAMBDA:M  >> When referencing the remaining time left for a Lambda function to run within the function's code you should use context object
+        LAMBDA:M  >> A Lambda deployment package contains: Function code and libraries not included within the runtime
+        LAMBDA:R  >> REMEMBER ALL LANGUAGES SUPPORTED BY LAMBDA
+        LAMBDA:M  >> Lambda requires you to specifically allocate certain resources. The following can you adjust directly: 1) Execution timeout 2) Memory
