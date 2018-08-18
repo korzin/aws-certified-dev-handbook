@@ -1,7 +1,6 @@
 AWS Lambda
 -----------
 
-## Lambda definition
 
 ## Lambda event sources 
 * HTTP requests through API Gateway
@@ -12,3 +11,4 @@ AWS Lambda
 * Direct invocations
 * etc. 
     
+  

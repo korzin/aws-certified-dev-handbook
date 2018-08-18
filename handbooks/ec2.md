@@ -90,6 +90,8 @@ Your Elastic IP addresses remain associated with your AWS account until you expl
 
 LIMIT : You're limited to 5 Elastic IP addresses; to help conserve them, you can use a NAT device (see NAT).
 
+  You cannot place a Bastion Host in the Private subnet with a Public IP address as that configuration will not work. 
+  
 #### Network interface
 
 A network interface can include the following attributes:

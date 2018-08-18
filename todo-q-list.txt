@@ -2,7 +2,8 @@
         EC2:R  >>  All scenario based 2-3 lines revolving around assigning Elastic address
         EC2:R  >>  AMI, AKI, ARI
         EC2:R  >>  EC2 ERRORS
-        EC2:r  >>  Auto Scaling group
+        EC2:R  >>  Auto Scaling group
+        EC2:R  >>  Elastic IP in private vs public subnet
         AMI:R  >>  From what you can create an image(EC2 instance, main volume, ebs volume, snapshot)
 
         EBS:R  >>  do task in lab(Web academy  - EBS) about measuring IOPS with filesystem. Understand average numbers in IOPS, alernatives
@@ -37,9 +38,7 @@
         VPC:M  >>  When you launch an instance into a VPC, we provide the instance with a private DNS hostname, and a public DNS hostname if the instance receives a public IPv4 address. If domain-name-servers in your DHCP options is set to AmazonProvidedDNS, the public DNS hostname takes the form ec2-public-ipv4-address.compute-1.amazonaws.com for the us-east-1 region, and ec2-public-ipv4-address.region.compute.amazonaws.com for other regions. The private hostname takes the form ip-private-ipv4-address.ec2.internal for the us-east-1 region, and ip-private-ipv4-address.region.compute.internal for other regions. To change these to custom DNS hostnames, you must set domain-name-servers to a custom DNS server.
         VPC:R  >>  Troubleshooting Conectivity: Outside VPC to instance in VPC :: Gateway(IGW or VPG) attached, Routing rules from corp network to VPC, Routing table on VPC or subnet, EIP or public IP on instance, NACLs, SG, Os-level firewals
         VPC:M  >>  Subnet VPC: 200
-
-
-
+        VPC:M  >>  Gateway VPC Endpoints
 
         DYNAMO:M  >>  WCU = 1 write of 1 item of 1KB or less per second
         DYNAMO:R  >>  WCU
@@ -117,6 +116,12 @@
         SQS:M  >>  SQS message retained: 14 days  ,SQS message: 256 KB of text in any format (10 items max)  ,SQS timeout: 30 seconds (default) 12 hours (max)  ,SQS long polling: 20 seconds(default/max) 1 sec(min)  ,SQS is PCI DSS certified  ,SQS/SNS visibility: ChangeMessageVisiblity  ,SQS/SNS delete: DeleteMessage
         SQS:R  >>  Basic SQS functionality, Protocols used and ,Long Polling ,Max Visibility timeout scenario Questions
         SQS:R  >>  DelaySeconds
+        SQS:R  >>  DelaySeconds
+        SQS:R  >>  VisibilityTimeout
+        SQS:M  >>  Standard Queues: * Support unlimited number of msgs. * 120k In-Flight msgs * Multiple producer and multi. consumers * Guarentee delivery of each msg **at least once** with **best affort ordering**
+        SQS:M  >>  FIFO Queues : * Support 3k msgs per sec. with batching and 300 msg per sec without batching (**YOU CAN ASK AWS SUPPORT TO INCREASE**) * Support multiple producers and **multiple consumers through the use of Group IDs**: 1) GroupId can be used to interleave multiple ordered msg groups within a single Q. 2) Msgs processed in order with respect to the group, but not always with respect to other groups * Designed for an Apps where order is critical. * Support 20r Pre-Flight msgs
+        SQS:R  >>  SQSD API calls
+
         EFS:M  >>  The storage capacity will increase and decrease as you add or remove foles
         EFS:M  >>  Benefits of EFS: * Can be accessed by multiple EC2I at the same time, * Multiple EC2I can access same data, * Can be mounted to on-premise servers(see AWS Direct Connect) , * Allow migrate data to and from on-oremice servers, * Can scale on petabytes in size, maintaining law latency, * Only pay for what you use
         EFS:M  >>  You can mount EFS to EC2 on creation(like EBS volumes), but you can connect it via CLI when you connected to instance through SSH or using User Data script
@@ -127,7 +132,7 @@
         STS:R  >>  Request for credentials to STS API, can be through web console
         STS:R  >>  Requested credentials of STS API call, contains: Sec. Token, Access Key ID, Secret Access Key
         STS:R  >>  STS API Calls: AssumeRole, AssumeRoleWithWebIdentity, AssumeRoleWithSAML, GetFederationToken, GetSessionToken
-        KMS:R  >>  KMS API Actions : Encrypt, GenerateDataKey, Decrypt
+
         ELB:R  >>  Maitaining Session State with ELB (ELB Option1, ELB Option2, Non-ELB Option(Recommended))
         ELB:R  >>  Application LB
         ELB:R  >>  Network LB
@@ -139,6 +144,19 @@
         LAMBDA:R  >>  REMEMBER fucking Lambda triggers , and everything about them
         LAMBDA:R  >>   lambda concurrency and scale model
         LAMBDA:M  >>  All calls made to AWS Lambda must complete execution within 300 seconds. The default timeout is 3 seconds, but you can set the timeout to any value between 1 and 300 seconds.\
+        LAMBDA:M  >> Lambda allows you to upload code and dependencies for function packages: 1) From a zip file in AWS S3  2)  Uploaded directly from elsewhere
+        LAMBDA:R  >> Common limits. e.g. Max exec duration is 5min
+        LAMBDA:M  >> When referencing the remaining time left for a Lambda function to run within the function's code you should use context object
+        LAMBDA:M  >> A Lambda deployment package contains: Function code and libraries not included within the runtime
+        LAMBDA:R  >> REMEMBER ALL LANGUAGES SUPPORTED BY LAMBDA
+        LAMBDA:M  >> Lambda requires you to specifically allocate certain resources. The following can you adjust directly: 1) Execution timeout 2) Memory
+        LAMBDA  >>  Split traffic between two different vertion of lambda finction
+        LAMBDA:R  >>  Debugging and common errors
+
+        KMS:R  >>  KMS API Actions : Encrypt, GenerateDataKey, Decrypt
+        KMS:R  >>  wtf is key material
+        KMS:R  >>  Memorise whole fucking API. will be on exam
+        KMS:R  >>  wtf is key rotation
 
         EC:R  >>  Caching stratefies(Lazy loading, Write through, adding time to live(TTL)
 
@@ -161,23 +179,36 @@
         CF:R  >>  CloudFormation template anatomy (different sections)
         CF:M  >>  to get Output Data: Fn:GetAtt  , List all Resources: ListStackResources  , stack waiting: WaitCondition  ,  stack: 200  ,  Template: No limit  ,  Parameter: 60
         CF:R  >>  How exaply CF updating stack. If I have already running ec2i and I want to change ssh key. ec2i will be restarted, stopped-started or maybe terminated after launching of another ec2i
-------------------------------------------------------------------------------------------------------------------------
-
-        AWS:R  >>  Transfering ownership of resources to another user, to anothar account. From user of one account to user from another account
-        IAM:R  >>  Variables in Policy (like ${aws.username} ). What kind of variables exist. Where else we can put these variables.
 
         ELB:R  >>   X-Forwarded-for
         ELB:R  >>  Where and how many security group can be attached to( ELB, EC2, other)
-
         ELB:R  >>  multiple SSL certificates on an Elastic Load Balancer.
+        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
+        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
+        ELB:R  >>  ELB Session Stickiness. Scenario question which got my thinking for quite some time.
+        ELB:R  >>  Sticky-sessions with ELB
+
+        IAM:R  >>  Variables in Policy (like ${aws.username} ). What kind of variables exist. Where else we can put these variables.
+        IAM:R  >>  Options on authenticating using LDAP together with IAM.
+        IAM:M  >>   When a new AWS root account is created, it is &quot;best practice&quot; to complete these 5 steps: 1. Delete your root access keys 2. Activate MFA on your root account 3. Create individual IAM users 4 User groups to assign persmissions 5. Apply an IAM password policy
+        IAM:M  >>  IAM do not restrict rrafic, it restrict API calls and actions
+        IAM:R  >>  Options on authenticating using LDAP together with IAM.
+
+        ECS:M  >>  If you use Amazon ECS CLI (not a AWS CLI) then you have benefits as support of Docker Compose
+        ECS:R  >>  ECR repository police and IAM user access policy
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+        AWS:R  >>  Transfering ownership of resources to another user, to anothar account. From user of one account to user from another account
+
         AWS:M  >>  The default region for an SDK is &quot;US-EAST-1&quot;.
         AWS:R  >>  Restrict Viewer Access (Use Signed URLs or Signed Cookies)
         APIG:M  >>  Host names APIs in API Gateway, which are deployed to a specific region and of the {rest-api-id}.execute-api.{region}.amazonaws.com format.
         AWS:R  >>  Where names should be unique (to all services. For example . IAM(global, w/p region), what entities should have unique names(e.g. Policy name, Role name). Another example maybe from some region specific AWS service)
-        IAM:R  >>  Options on authenticating using LDAP together with IAM.
         EB:R  >>  Resources that Elastic Beanstalk can create
         AWS:R  >>  CORS in AWS
-        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
         AWS:R  >>  AWS Import/Export. For what, benefits
         AWS:R  >>  AWS Snowball. For what benefits, usecases
         AWS:R  >>  LIMITS IN AWS GIVE YOU % POINTS ON EXAM. * Know/review limits for S3, DynamoDB, EC2, SNS, and SQS.
@@ -189,43 +220,29 @@
         COGNITO:R  >> Identity pools
         APIG:M  >>  You can use API Gateway with SOAP
 
-        KMS:R  >>  wtf is key material
-        KMS:R  >>  Memorise whole fucking API. will be on exam
-        KMS:R  >>  wtf is key rotation
         AWS:R  >>  DIff SG vs ACL
 
-        IAM:M  >>  IAM do not restrict rrafic, it restrict API calls and actions
-        LAMBDA  >>  Debugging and common errors
         AWS:M  >>  Ping utility use ICMP protocol
         AWS:R  >>  When to use which: SSL over web, VPN for IPSec, Direct connect, Import/Export
         AWS:M  >>  If you will be asked about which services can store enrypted data,  you have to look from speed perspective. If service built to provide high performance then it doesn't store encrypted data. There are 5 answers and i'll mark three right from them : EBS volumes (+) , S3(+), Inctance stored volumes(-) , Redshift (+) ,  DynamoDb(-)  , ElasticCache (-)
         AWS:R  >>  Remenber Shared Responsibility Model (e.g. Aws responsibilities : Facilities, Phisical sec, physical infrastructure, netwrold else) , Cystomer responsibility: (OS, App, SG, OS firewalls Network config, Acc managment)
         AWS:R  >>  Troubleshooting Limits Issues :: * AWS has many soft limits, * Plus a few hard limits.  .
         AWS:R  >>  Troubleshooting Limits Issues :What if you achive a lmit (how to increase)
-        ECS:M  >>  If you use Amazon ECS CLI (not a AWS CLI) then you have benefits as support of Docker Compose
-        ECS:R  >>  ECR repository police and IAM user access policy
         53:M  >>  Record types : * A  : IPv4 * AAAA : IPv6, CAA : A CAA record lets you specify which certificate authorities (CAs) are allowed to issue certificates for a domain or subdomain.(docs ref: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html?shortFooter=true#CAAFormat) * CNAME : Specify domain, such ass 'hostname.example.com' * MX : Used to specify email servers with priorities (e.g. '10 mail.example.com' ) * NS :  identifies the name servers for the hosted zone (e.g. 'ns-1.example.com') * PTR : the same as CNAME * SOA : A start of authority (SOA) record provides information about a domain and the corresponding Amazon Route 53 hosted zone (e.g. ns-2048.awsdns-64.net hostmaster.awsdns.com 1 1 1 1 60) *
-        IAM:M  >>   When a new AWS root account is created, it is &quot;best practice&quot; to complete these 5 steps: 1. Delete your root access keys 2. Activate MFA on your root account 3. Create individual IAM users 4 User groups to assign persmissions 5. Apply an IAM password policy
         AWS:R  >>  Remember all various service parameter values e.g. timers, max limits, etc. for S3, SQS, DynamoDB
-        ELB:R  >>  ELB Session Stickiness. Scenario question which got my thinking for quite some time.
-        IAM:R  >>  Options on authenticating using LDAP together with IAM.
+
+        AWS:R  >>  For what languages AWS provide SDKs
+        AWS:R  >>  What types of API you can use with AWS (e.g. SDK, CLI, maybe REST for some services. etc)
         AWS:R  >>  CORS check where it can be used
-        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
-        SWF:R  >>  API calls
+
         AWS:R  >>  Abbreviations for AWS exam.. e.g. DR, RPO, RTO, ect
         AWS:M  >>  Encryption: 256-bit Advanced Encryption Standard (AES-256)
-        SWF:M  >>  SWF retention: 1 year  ,SWF Domain: 100 per account (containers for segregating app resources)  ,SWF Workflow/activity-10,000  ,SWF Request size: 1MB  ,SWF Open: 1000
+
+
         AWS:R  >>  Web Federation, Corporate network,
-        ELB:R  >>  Sticky-sessions with ELB
-        AWS:M  >>   400 - Server does not understand the request. (MissingAction, MissingParameter, incompleteSignature, invalidParameterValue, incompleteBody)  403 - forbidden (Ex: AccessDenied, InvalidClientTokenID, MalformedQueryString, invalidObjectState)  404 - The page URL request cannot be found due to the Server Down Time or Broken Links. (Ex: NoSuchBucket, NoSuchVersion,NoBucketPolicy)  409-  BucketAlreadyExists,InvalidBucketState,BucketNotEmpty,OperationAborted,RestoreAlreadyInProgress
+        AWS:M  >>  400 - Server does not understand the request. (MissingAction, MissingParameter, incompleteSignature, invalidParameterValue, incompleteBody)  403 - forbidden (Ex: AccessDenied, InvalidClientTokenID, MalformedQueryString, invalidObjectState)  404 - The page URL request cannot be found due to the Server Down Time or Broken Links. (Ex: NoSuchBucket, NoSuchVersion,NoBucketPolicy)  409-  BucketAlreadyExists,InvalidBucketState,BucketNotEmpty,OperationAborted,RestoreAlreadyInProgress
         AWS:M  >>  SDK default region Default region (us-east-1)
-        LAMBDA  >>  Split traffic between two different vertion of lambda finction
         AWS:R  >>  One guy wrote sume dump from exam. I didn't get it: its like two Q, or only one Q ::::: Elastic Cache to avoid the session state problem
-        SWF:R  >>  Basic Functionality Scenario Based(like what all the functionally used by SWF
-        AWS:R >> CloudFront
-        LAMBDA:M  >> Lambda allows you to upload code and dependencies for function packages: 1) From a zip file in AWS S3  2)  Uploaded directly from elsewhere
-        LAMBDA:R  >> Common limits. e.g. Max exec duration is 5min
-        LAMBDA:M  >> When referencing the remaining time left for a Lambda function to run within the function's code you should use context object
-        LAMBDA:M  >> A Lambda deployment package contains: Function code and libraries not included within the runtime
-        LAMBDA:R  >> REMEMBER ALL LANGUAGES SUPPORTED BY LAMBDA
-        LAMBDA:M  >> Lambda requires you to specifically allocate certain resources. The following can you adjust directly: 1) Execution timeout 2) Memory
+        AWS:R  >>  CloudFront
+        AWS:R  >>  VPN connection
+        AWS:R  >>  AWS Direct Connect
