@@ -40,24 +40,16 @@
         VPC:M  >>  Subnet VPC: 200
         VPC:M  >>  Gateway VPC Endpoints
 
-        DYNAMO:M  >>  WCU = 1 write of 1 item of 1KB or less per second
+
+
+
+
+
         DYNAMO:R  >>  WCU
         DYNAMO:R  >>  RCU
-        DYNAMO:M  >>  1 RCU = 1 read of 1 item of 4KB or less per second (stringly consistent)
-        DUNAMO:M  >>  Eventually consistent reads require half of RCU
         DUNAMO:R  >>  LSI
         DYNAMO:R  >>  GSI
-        DYNAMO:M  >>  You can't do stringly consistent reads on GSI
-        DYNAMO:M  >>  GSI consume read and write capacity independently from the main table and have their WCU and RCU provided thoughput
-        DYNAMO:M  >>  You can create GSI after table is created
-        DYNAMO:M  >>  LSII Primary Keys are composite keys (partition and sort key)
-        DYNAMO:M  >>  Each LSI act as another sort key
-        DYNAMO:M  >>  Each LSI kept in sync with the base table
-        DYNAMO:M  >>  Read and Write capacity for local secondary indexes is taken from the capacity of the base table
-        DYNAMO:M  >>  LSIs must be created when table is created
-        DYNAMO:R  >>  Conditional check failed excaption
-        DYNAMO:R  >>  Atomic counters
-        DYNAMO:R  >>  Conditional Writes
+
         DYNAMO:R  >>  Limits
         DYNAMO:R  >>  Errors
         DYNAMO:R  >>  Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
@@ -65,13 +57,12 @@
         DYNAMO:R  >>  ProjectionExpression parameter
         DYNAMO:R  >>  DynamoDb &amp; IAM. Conditions .(eq, else)
         DYNAMO:R  >>  dynamoLLeadingKeys
-        DYNAMO:M  >>  DynamoDB Throughput Exceeded: ProvisionedThroughputExceededException  ,DynamoDB Item size: 400KB  ,DynamoDB Local+Global Secondary Index: 5 for each  ,DynamoDB Max Tables Per: 256 tables  ,DynamoDB Attributes (column): Unlimited Region  ,DynamoDB doesn’t consume capacity units if it’s just modifying Table  ,DynamoDB (Scan/Query): ProjectionExpression  ,DynamoDB query item by partition: GetItem  ,DynamoDB query multiple item (up to 100 items + Max 16MB): BatchGetItem  ,DynamoDB scan data: 1MB  ,DynamoDB Reserved Capacity: 100 Capacity  ,DynamoDB list up to 100 tables: ListTables
         DYNAMO:R  >> Throughput error (like if not Table then what is the cause)
         DYNAMO:R  >>   hash and range keys .  how to optimize each for specific queries for the best performance
         DYNAMO:R  >>   number of records.
         DYNAMO:R  >>   Optimizing performance for DynamoDB
 
-
+        S3:R  >>  Signed URLs with expiry dates.
         S3:R  >>  S3 bucket name requirement(DNS complient, else)
         S3:R  >>  Region, where s3 store data
         S3:M  >>  Bucket limitations: oly 100 buckets within account, Bucket ownership cannot be trandfered once a bucket is created, Can hold unlimited objects
@@ -84,6 +75,7 @@
         S3:R  >>  Storage gateway
         S3:R  >>  Gateway-Cached Volumes , Gateway-Storage volumes
         S3:R  >>  Performance
+        S3:R  >>  (SSE-S3)
         S3:R  >>  Partitions, not too deep
         S3:R  >>  Mixed request workloads(keys etc)
         S3:R  >>  S3 Intensive workloadss
@@ -137,7 +129,7 @@
         ELB:R  >>  Application LB
         ELB:R  >>  Network LB
         ELB:R  >>  TLS termination in App load balancer. (+ Q: Is that feature presented in Network LB)
-
+        ELB:R  >>  URL pattern like ....sometext.elb.amazonaws.com or sth
         LAMBDA:R  >>  Packages
         LAMBDA:R  >>  VPC for Lambda. What access lambda can get without roles
         LAMBDA:R  >>  Review all API actions
@@ -246,3 +238,21 @@
         AWS:R  >>  CloudFront
         AWS:R  >>  VPN connection
         AWS:R  >>  AWS Direct Connect
+
+----------------------------
+Access through OnPremice -> LDAP -> AWS -> IAM/STS -> S3(using temporal .. sth)
+Registration through GCM and SNS
+X-ray .
+See examples with S3 and CF
+
+Canned ACL
+SAML
+Deanstalk : for what i have to pay
+
+
+SQS :: What is 12 hours and fpr what is 12 days
+S3: pre-signed URL
+How many Enge location aws have. Is that bigger than regions number
+There is no BatchGetItems. there is only BatchGetItem ( without S you dumb-ass)
+
+

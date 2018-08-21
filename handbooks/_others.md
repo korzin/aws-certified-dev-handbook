@@ -133,6 +133,12 @@ DescribeActivityType
 
 
 
+# ElasticCache 
+
+#### TTL
+    
+Time to live (TTL) is an integer value that specifies the number of seconds until the key expires. When an application attempts to read an expired key, it is treated as though the key is not found, meaning that the database is queried for the key and the cache is updated. This does not guarantee that a value is not stale, but it keeps data from getting too stale and requires that values in the cache are occasionally refreshed from the database.
+
 
 
 

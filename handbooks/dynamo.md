@@ -2,6 +2,62 @@
 ## DynamoDB definition
 
 
+DynamoDB Throughput Exceeded: ProvisionedThroughputExceededException  ,
+
+DynamoDB doesn’t consume capacity units if it’s just modifying Table
+
+## Basics
+
+### Atomic Counters
+
+You can use the UpdateItem operation to implement an atomic counter—a numeric 
+attribute that is incremented, unconditionally, without interfering with other
+ write requests. (All write requests are applied in the order in which they were
+  received.) With an atomic counter, the updates are not idempotent. In other 
+  words, the numeric value will increment each time you call UpdateItem
+
+An atomic counter would not be appropriate where overcounting or 
+undercounting cannot be tolerated (For example, in a banking 
+application). In this case, it is safer to use a conditional 
+update instead of an atomic counter.
+
+### Conditional writes
+Required to check before PUT/UPDATE/else before take an action.
+
+If you check item and this item does not exist, you spent 1 WCU, otherwise depends on item size
+
+
+## DynamoDB Encryption at Rest  
+Amazon DynamoDB offers fully managed encryption at rest. DynamoDB encryption at rest provides enhanced security by encrypting your data at rest using an AWS Key Management Service (AWS KMS) managed encryption key for DynamoDB. This functionality eliminates the operational burden and complexity involved in protecting sensitive data.
+
+Dynamo use its own key. Sth like aws/dynamo. Table store enrypted data
+
+Streams doesn't support encryption
+    
+## Indexes 
+
+### GSI (Global secondary index)
+
+You can create GSI after table is created
+
+GSI consume read and write capacity independently from the main table and have their WCU and RCU provided thoughput
+
+You can't do strongly consistent reads on GSI.
+
+
+### LSI (Local secondary index)
+
+LSI Primary Keys are composite keys (partition and sort key)
+ 
+Each LSI act as another sort key
+
+Each LSI kept in sync with the base table
+ 
+LSIs must be created when table is created, you can create LSI and attach to existing table
+  
+Read and Write capacity for LSI is taken from the capacity of the base table
+  
+
 
 ## Primary key TODO 
 
@@ -16,11 +72,19 @@ The following additional constraints apply to primary key attributes that
 * For a composite primary key, the maximum length of the second attribute value
  (the sort key) is 1024 bytes.
 
-## Provisioned throughput TODO add info for calculations 
+## Provisioned throughput
 
+ **1 WCU = 1 write of 1 item of 1KB or less per second**
+
+ **1 RCU = 1 read of 1 item of 4KB or less per second**
+
+ **1 ECU = 1 RCU / 2** (Eventually consistent reads require half of RCU)
 
 ## Limits 
 
+DynamoDB scan data max: 1MB  
+
+DynamoDB list up to 100 tables: ListTables
 #### Provisioned throughput limits
 
 Minimum settings for provisioned throughput are 1 read capacity unit and 1 write capacity unit.
@@ -76,10 +140,6 @@ The maximum length is 2048 bytes for partition key and 1024 for sort key.
   The result set from a Scan is limited to 1 MB per call. You can use the LastEvaluatedKey from the scan response to retrieve more results.
 
 
-
-
-
-
 ## Tables 
 
  You can also use the UpdateTable operation to manually adjust your table's throughput capacity
@@ -121,6 +181,9 @@ Status of tables flow while updating :
 
 AVAILABLE ----------> UPDATING -------------> AVAILABLE 
             (still available for queries)
+            
+            
+            
 ## DynamoDB DataTypes
 
 ### General type groups 
@@ -187,15 +250,6 @@ The following is a complete list of DynamoDB data type descriptors:
 * SS – String Set
 * NS – Number Set
 * BS – Binary Set
-
-### Atomic Counters
-
-You can use the UpdateItem operation to implement an atomic counter—a numeric 
-attribute that is incremented, unconditionally, without interfering with other
- write requests. (All write requests are applied in the order in which they were
-  received.) With an atomic counter, the updates are not idempotent. In other 
-  words, the numeric value will increment each time you call UpdateItem
-
 
 ## API
 
@@ -295,12 +349,11 @@ Create or delete up to 25 items in one or more tables.
     
 ## Common Errors 
 
-
-#### AccessDeniedException
-You do not have sufficient access to perform this action.
-
-HTTP Status Code: 400
-
+#### ConditionalCheckFailedException
+ Message: The conditional request failed.
+ 
+ You specified a condition that evaluated to false. For example, you might have tried to perform a conditional update on an item, but the actual value of the attribute did not match the expected value in the condition.
+ 
 #### IncompleteSignature
 The request signature does not conform to AWS standards.
 
@@ -346,11 +399,6 @@ The request is missing an action or a required parameter.
 
 HTTP Status Code: 400
 
-#### MissingAuthenticationToken
-The request must contain either a valid (registered) AWS access key ID or X.509 certificate.
-
-HTTP Status Code: 403
-
 #### MissingParameter
 A required parameter for the specified action is not supplied.
 
@@ -383,9 +431,25 @@ HTTP Status Code: 400
   
   
   
+## Best Practices for DynamoDB
+
+### Partition Keys  
+
+Partition key should looks like PersonId, DeviceId, CustomerId. 
+Be aware of projects where some subset of Persons, Devices, else requires access more frequently than others. 
+
+#### Sharding using random suffixes
   
-  
-  
+Add random suffixes to partition key. 
+Example: (if partion key is a date of order)
+2014-07-09.1, 2014-07-09.2, and so on, through 2014-07-09.200.
+But now you have to make several queries to combine orders that was created in specific day.
+
+#### Calculated suffixes 
+
+.... 
+
+
   
   
   

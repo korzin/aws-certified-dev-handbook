@@ -1,6 +1,10 @@
 
 #CloudFormation
 
+
+Max number of stacks per region is 200
+
+If error occur during creation of a stack, ROLLBACK_IN_PROGRESS an then ROLLBACK_COMPLETE statuses appear
 ## Cloud formation concepts
 
 ### Definition

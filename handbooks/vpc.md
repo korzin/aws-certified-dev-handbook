@@ -1,7 +1,9 @@
 # VPC
 
 
+## VPC Flow logs 
 
+You can create a flow log for a VPC, a subnet, or a network interface
 ## VPC Endpoint 
 
 VPC Endpoints
@@ -46,3 +48,8 @@ Policy example to allow manage endpoints :
 
  (S3 and DynamoDB)
  
+
+## Limits 
+
+NAT gateways per Availability Zone  <= 5
+

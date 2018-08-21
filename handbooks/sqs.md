@@ -1,5 +1,9 @@
 
 
+## Limits 
+
+The default (minimum) visibility timeout for a message is 30 seconds. The maximum is 12 hours.
+
 ## Brief description and benefits
 
 * Security 
