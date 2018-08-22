@@ -1,6 +1,9 @@
 
 #CloudFormation
 
+Number of templates  :  No limit  
+
+Max number of Parameter: 60
 
 Max number of stacks per region is 200
 
@@ -65,6 +68,9 @@ Example of template
 When you use AWS CloudFormation, you manage related resources as a single 
 unit called a stack. You create, update, and delete a collection of resources
  by creating, updating, and deleting stacks. All the resources in a stack are defined by the stack's AWS CloudFormation template. 
+ 
+Stack waiting: WaitCondition  
+
 
 ####Change Sets
 If you need to make changes to the running resources in a stack, you update 
@@ -199,4 +205,63 @@ Example of AMI id in JSON format:
               ImageId: "ami-2f726546"
           
 
-#### 
+## Intrinsic functions 
+
+* Fn::Base64 - get base64 encoded string
+* Fn::Cidr - return array of CIDR address block. ( !Cidr [ ipBlock, count, cidrBits ] )
+* Condition functions: Fn::And, Fn::Equals, Fn::If, Fn::Not, Fn::Or
+* Fn::FindInMap - ( !FindInMap [ RegionMap, !Ref "AWS::Region", 32bit ] )
+* Fn::GetAtt - ( !GetAtt myELB.SourceSecurityGroup.GroupName )
+* Fn::GetAZs - returns an array that lists Availability Zones for a specified region
+* Fn::ImportValue - (Fn::ImportValue !Sub "${NetworkStack}-SubnetID") - and this crap was exported in another stack in Output section
+* Fn::Join
+    
+        !Join
+          - ''
+          - - 'arn:'
+            - !Ref Partition
+            - ':s3:::elasticbeanstalk-*-'
+            - !Ref 'AWS::AccountId'
+* Fn::Select - returns a single object from a list of objects by index. (like in java: List::get(i))
+        
+        !Select [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ]
+* Fn::Split
+
+        { "Fn::Split" : [ "|" , "a|b|c" ] }
+* Fn::Sub - there are 2 types: with specifying what to insert, and without specifying(e.g. using AWS::StackName )
+
+        Name: !Sub
+          - www.${Domain}.${AWS::StackName}
+          - { Domain: !Ref RootDomainName }
+
+* Fn:Ref - specify logical ID, and function will return physical ID. E.g. ( { "Ref" : "logicalName" } )
+          
+     
+
+## API (just to review)
+
+CreateStack
+
+CreateStackInstances
+
+CreateStackSet
+
+ListStackResources 
+
+ListStackInstances
+
+ListStackResources
+
+ListStacks
+ 
+ListStackSets
+
+UpdateStack
+
+DescribeStacks 
+
+DescribeStackEvents
+
+DescribeStackInstance
+
+DescribeStackResource 

@@ -167,11 +167,6 @@
         SNS:R  >>  SNS message format
         SNS:R  >>  http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
 
-        CF:R  >>  CloudFormation Output section and Function you would use
-        CF:R  >>  CloudFormation template anatomy (different sections)
-        CF:M  >>  to get Output Data: Fn:GetAtt  , List all Resources: ListStackResources  , stack waiting: WaitCondition  ,  stack: 200  ,  Template: No limit  ,  Parameter: 60
-        CF:R  >>  How exaply CF updating stack. If I have already running ec2i and I want to change ssh key. ec2i will be restarted, stopped-started or maybe terminated after launching of another ec2i
-
         ELB:R  >>   X-Forwarded-for
         ELB:R  >>  Where and how many security group can be attached to( ELB, EC2, other)
         ELB:R  >>  multiple SSL certificates on an Elastic Load Balancer.

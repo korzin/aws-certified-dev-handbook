@@ -115,7 +115,7 @@ The maximum length is 2048 bytes for partition key and 1024 for sort key.
 
 #### API Limits 
 
-* CRUD: 
+* CRUD(tables): 
   
   In general, you can have up to 10 CreateTable, UpdateTable, and DeleteTable requests running simultaneously (in any combination). 
 
