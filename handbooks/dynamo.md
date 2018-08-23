@@ -79,6 +79,10 @@ The following additional constraints apply to primary key attributes that
  **1 RCU = 1 read of 1 item of 4KB or less per second**
 
  **1 ECU = 1 RCU / 2** (Eventually consistent reads require half of RCU)
+ 
+ **Calculate number of partitions**:
+ 
+ **Total_partitions = Max( ( Total_RCU / 3000 ) + ( Total_WCU / 1000 )** 
 
 ## Limits 
 

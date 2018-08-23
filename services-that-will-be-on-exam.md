@@ -26,4 +26,4 @@
 |SNS                       |                |
 |SQS                       |                |
 |SWF                       |        Yes     |
-|CloudFront                |                |
+|CloudFront                |        Yes     |

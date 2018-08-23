@@ -167,14 +167,6 @@
         SNS:R  >>  SNS message format
         SNS:R  >>  http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
 
-        ELB:R  >>   X-Forwarded-for
-        ELB:R  >>  Where and how many security group can be attached to( ELB, EC2, other)
-        ELB:R  >>  multiple SSL certificates on an Elastic Load Balancer.
-        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
-        ELB:R  >>  ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
-        ELB:R  >>  ELB Session Stickiness. Scenario question which got my thinking for quite some time.
-        ELB:R  >>  Sticky-sessions with ELB
-
         IAM:R  >>  Variables in Policy (like ${aws.username} ). What kind of variables exist. Where else we can put these variables.
         IAM:R  >>  Options on authenticating using LDAP together with IAM.
         IAM:M  >>   When a new AWS root account is created, it is &quot;best practice&quot; to complete these 5 steps: 1. Delete your root access keys 2. Activate MFA on your root account 3. Create individual IAM users 4 User groups to assign persmissions 5. Apply an IAM password policy
@@ -233,7 +225,7 @@
         AWS:R  >>  CloudFront
         AWS:R  >>  VPN connection
         AWS:R  >>  AWS Direct Connect
-
+        AWS:R  >>  what is your responsibility in the shared responsibility mode
 ----------------------------
 Access through OnPremice -> LDAP -> AWS -> IAM/STS -> S3(using temporal .. sth)
 Registration through GCM and SNS
