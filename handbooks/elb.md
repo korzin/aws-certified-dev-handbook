@@ -11,6 +11,8 @@
 
 # Elastic Load Balancer 
 
+By default, Elastic Load Balancing sets the idle timeout to 60 seconds for both connections. 
+
 Elastic Load Balancing distributes incoming application or network traffic across 
 multiple targets, such as Amazon EC2 instances, containers, and IP addresses, 
 in multiple Availability Zones.

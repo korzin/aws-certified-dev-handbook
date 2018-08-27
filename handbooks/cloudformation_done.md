@@ -3,6 +3,8 @@
 
 Number of templates  :  No limit  
 
+Charges for AWS resources created during template instantiation apply irrespective of whether the stack could be created successfully or not.
+    
 Max number of Parameter: 60
 
 Max number of stacks per region is 200

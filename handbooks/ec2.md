@@ -48,6 +48,8 @@ You can select an AMI to use based on the following characteristics:
 
 ## EC2 Service
 
+
+To launch instance use run-instances    
 ### Shared responsibility model //TODO
 
 ![Shared responsibility model][https://d1.awsstatic.com/security-center/Shared_Responsibility_Model_V2.59d1eccec334b366627e9295b304202faf7b899b.jpg]
@@ -387,39 +389,57 @@ After stopping, starting, rebooting instance (EBS-backed) IPv4 retains.
 
 If you enable termination protection, you can't terminate the instance using the console, CLI, or API.
 
-An instance **reboot** is equivalent to an operating system reboot. In most cases, it takes only a few minutes to reboot your instance. When you reboot an instance, it remains on the same physical host, so your instance keeps its public DNS name (IPv4), private IPv4 address, IPv6 address (if applicable), and any data on its instance store volumes.
+An instance **reboot** is equivalent to an operating system reboot. In most cases, it takes only a few minutes 
+to reboot your instance. When you reboot an instance, it remains on the same physical host, so your instance keeps
+ its public DNS name (IPv4), private IPv4 address, IPv6 address (if applicable), and any data on its instance
+  store volumes.
 
 ### Placement groups
 Determines how instances are placed on underlying hardware.
-#### Cluster Plaement Group
+
+`A placement group(cluster placement group) can’t span multiple Availability Zones.`
+#### Cluster Placement Group (aka Placement group)
 A cluster placement group is a logical grouping of instances within a single Availability Zone.
-Cluster placement groups are recommended for applications that benefit from low network latency, high network throughput, or both, and if the majority of the network traffic is between the instances in the group.
+Cluster placement groups are recommended for applications that benefit from low network latency, high network
+ throughput, or both, and if the majority of the network traffic is between the instances in the group.
+ 
+ 
 #### Spread Placement Groups
 A spread placement group is a group of instances that are each placed on distinct underlying hardware.
 
-Spread placement groups are recommended for applications that have a small number of critical instances that should be kept separate from each other. Launching instances in a spread placement group reduces the risk of simultaneous failures that might occur when instances share the same underlying hardware. Spread placement groups provide access to distinct hardware, and are therefore suitable for mixing instance types or launching instances over time.
+Spread placement groups are recommended for applications that have a small number of critical instances that should
+ be kept separate from each other. Launching instances in a spread placement group reduces the risk of simultaneous 
+ failures that might occur when instances share the same underlying hardware. Spread placement groups provide access 
+ to distinct hardware, and are therefore suitable for mixing instance types or launching instances over time.
 
-A spread placement group can span multiple Availability Zones, and you can have a maximum of seven running instances per Availability Zone per group.
+A spread placement group can span multiple Availability Zones, and you can have a maximum of seven running instances 
+per Availability Zone per group.
 
 -----
 
 ## EBS
 
-###EBS Volumes
+### EBS Volumes
+
+
+To now lose temporal data (such as transaction logs on ec2i) you have to unmount ebs and only then shutdown ecwi
 
 An Amazon EBS volume is a durable, block-level storage device that you can attach to a single EC2 instance. 
 
 By default, Amazon EBS-backed instance root volumes have the DeleteOnTermination flag set to true.
 
-You can restore an Amazon EBS volume with data from a snapshot stored in Amazon S3. You need to know the ID of the snapshot you want to restore your volume from and you need to have access permissions for the snapshot.
+You can restore an Amazon EBS volume with data from a snapshot stored in Amazon S3. You need to know the ID of the
+ snapshot you want to restore your volume from and you need to have access permissions for the snapshot.
 
 EBS volumes that are restored from encrypted snapshots are automatically encrypted.
  
-New EBS volumes receive their maximum performance the moment that they are available and do not require initialization (formerly known as pre-warming). 
+New EBS volumes receive their maximum performance the moment that they are available and do not require initialization
+ (formerly known as pre-warming). 
 
 EBS volumes replicated within the Availability Zone
 
-You can detach an Amazon EBS volume from an instance explicitly or by terminating the instance. However, if the instance is running, you must first unmount the volume from the instance.
+You can detach an Amazon EBS volume from an instance explicitly or by terminating the instance. However, if the 
+instance is running, you must first unmount the volume from the instance.
 
 If an EBS volume is the root device of an instance, you must stop the instance before you can detach the volume.
 
@@ -427,11 +447,13 @@ If an EBS volume is the root device of an instance, you must stop the instance b
 
 After you create a volume, you can attach it to any EC2 instance in the same Availability Zone.
 
-You can detach an Amazon EBS volume from an instance explicitly or by terminating the instance. However, if the instance is running, you must first unmount the volume from the instance.
+You can detach an Amazon EBS volume from an instance explicitly or by terminating the instance. However, if the 
+instance is running, you must first unmount the volume from the instance.
 
 If an EBS volume is the root device of an instance, you must stop the instance before you can detach the volume.
 
-You can reattach a volume that you detached (without unmounting it), but it might not get the same mount point and the data on the volume might be out of sync if there were writes to the volume in progress when it was detached.
+You can reattach a volume that you detached (without unmounting it), but it might not get the same mount point and 
+the data on the volume might be out of sync if there were writes to the volume in progress when it was detached.
 
 * Show list of disks with status, size, mountpoint: 
          
@@ -459,12 +481,24 @@ Limit for number of attached volumes is 40 for Linux and about (16 or 26) for Wi
 Amazon EBS currently supports a maximum volume size of 16 TiB
 
 ####EBS benefits : 
- * Data availability : automatically replicated within that zone to prevent data loss due to failure of any single hardware component within Availability Zone. 
+ * Data availability : automatically replicated within that zone to prevent data loss due to failure of any single 
+ hardware component within Availability Zone. 
  * Data persistence : Data in save even if you stop-start-reboot-terminate instance to which volume is attached
- * Data encryption : For simplified data encryption, you can create encrypted EBS volumes with the Amazon EBS encryption feature. All EBS volume types support encryption. 
- * Snapshots : When you create a new volume from a snapshot, it's an exact copy of the original volume at the time the snapshot was taken. EBS volumes that are restored from encrypted snapshots are automatically encrypted. By optionally specifying a different Availability Zone, you can use this functionality to create a duplicate volume in that zone. The snapshots can be shared with specific AWS accounts or made public. When you create snapshots, you incur charges in Amazon S3 based on the volume's total size. For a successive snapshot of the volume, you are only charged for any additional data beyond the volume's original size.
-               Snapshots are incremental backups, meaning that only the blocks on the volume that have changed after your most recent snapshot are saved. If you have a volume with 100 GiB of data, but only 5 GiB of data have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3. Even though snapshots are saved incrementally, the snapshot deletion process is designed so that you need to retain only the most recent snapshot in order to restore the volume. Snapshots stored in S3
- * Flexibility : EBS volumes support live configuration changes while in production. You can modify volume type, volume size, and IOPS capacity without service interruptions.
+ * Data encryption : For simplified data encryption, you can create encrypted EBS volumes with the Amazon EBS encryption
+  feature. All EBS volume types support encryption. 
+ * Snapshots : When you create a new volume from a snapshot, it's an exact copy of the original volume at the time the
+  snapshot was taken. EBS volumes that are restored from encrypted snapshots are automatically encrypted. By optionally 
+  specifying a different Availability Zone, you can use this functionality to create a duplicate volume in that zone.
+   The snapshots can be shared with specific AWS accounts or made public. When you create snapshots, you incur charges 
+   in Amazon S3 based on the volume's total size. For a successive snapshot of the volume, you are only charged for any
+    additional data beyond the volume's original size.
+               Snapshots are incremental backups, meaning that only the blocks on the volume that have changed after
+                your most recent snapshot are saved. If you have a volume with 100 GiB of data, but only 5 GiB of data
+                 have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3. Even 
+                 though snapshots are saved incrementally, the snapshot deletion process is designed so that you need 
+                 to retain only the most recent snapshot in order to restore the volume. Snapshots stored in S3
+ * Flexibility : EBS volumes support live configuration changes while in production. You can modify volume type, volume
+  size, and IOPS capacity without service interruptions.
 
 
 #### EBS Volume states
@@ -481,7 +515,8 @@ Process can be used to recover non-working boot volume:
 Volume cant be attached to ec2i, maybe causes are :
 * Limit - volumes you can attach to your instance. (about 40 for linux and up to 26 for Win)
   
-* If a volume is encrypted, it can only be attached to an instance that supports Amazon EBS encryption. For more information, see Supported Instance Types.
+* If a volume is encrypted, it can only be attached to an instance that supports Amazon EBS encryption. For more 
+information, see Supported Instance Types.
   
 * If a volume has an AWS Marketplace product code:
   * The volume can only be attached to a stopped instance.
@@ -524,11 +559,21 @@ Volume cant be attached to ec2i, maybe causes are :
   Used with Provisioned IOPS SSD volumes only. The percentage of I/O operations per second (IOPS) delivered of the total IOPS provisioned for an Amazon EBS volume. Provisioned IOPS SSD volumes deliver within 10 percent of the provisioned IOPS performance 99.9 percent of the time over a given year.
 
 
-###EBS Snapshots
+### EBS Snapshots
 
-You can back up the data on your Amazon EBS volumes to Amazon S3 by taking point-in-time snapshots. Snapshots are incremental backups, which means that only the blocks on the device that have changed after your most recent snapshot are saved. This minimizes the time required to create the snapshot and saves on storage costs by not duplicating data. When you delete a snapshot, only the data unique to that snapshot is removed. Each snapshot contains all of the information needed to restore your data (from the moment when the snapshot was taken) to a new EBS volume.
+Note that you can't delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first deregister 
+the AMI before you can delete the snapshot.
 
-When you create an EBS volume based on a snapshot, the new volume begins as an exact replica of the original volume that was used to create the snapshot. The replicated volume loads data lazily in the background so that you can begin using it immediately. If you access data that hasn't been loaded yet, the volume immediately downloads the requested data from Amazon S3, and then continues loading the rest of the volume's data in the background.
+You can back up the data on your Amazon EBS volumes to Amazon S3 by taking point-in-time snapshots. Snapshots are incremental
+ backups, which means that only the blocks on the device that have changed after your most recent snapshot are saved. This
+  minimizes the time required to create the snapshot and saves on storage costs by not duplicating data. When you delete a 
+  snapshot, only the data unique to that snapshot is removed. Each snapshot contains all of the information needed to restore
+   your data (from the moment when the snapshot was taken) to a new EBS volume.
+
+When you create an EBS volume based on a snapshot, the new volume begins as an exact replica of the original volume that was 
+used to create the snapshot. The replicated volume loads data lazily in the background so that you can begin using it immediately.
+ If you access data that hasn't been loaded yet, the volume immediately downloads the requested data from Amazon S3, and then 
+ continues loading the rest of the volume's data in the background.
 
 Deleting a snapshot of a volume has no effect on the volume. Deleting a volume has no effect on the snapshots made from it.
 
@@ -538,12 +583,15 @@ EBS snapshots broadly support EBS encryption:
 * When you copy an unencrypted snapshot that you own, you can encrypt it during the copy process.
 * When you copy an encrypted snapshot that you own, you can reencrypt it with a different key during the copy process.
 
-Although you can delete a snapshot that is still in progress, the snapshot must complete before the deletion takes effect. This may take a long time. If you are also at your concurrent snapshot limit (five snapshots in progress), and you attempt to take an additional snapshot, you may get the ConcurrentSnapshotLimitExceeded error.
+Although you can delete a snapshot that is still in progress, the snapshot must complete before the deletion takes effect.
+This may take a long time. If you are also at your concurrent snapshot limit (five snapshots in progress), and you attempt
+to take an additional snapshot, you may get the ConcurrentSnapshotLimitExceeded error.
 
-###EBS Encryption
+### EBS Encryption
 
-Amazon EBS encryption offers a simple encryption solution for your EBS volumes without the need to build, maintain, and secure your own key management infrastructure. When you create an encrypted EBS volume and attach it to a supported instance type, 
-the following types of data are encrypted:
+Amazon EBS encryption offers a simple encryption solution for your EBS volumes without the need to build, maintain, 
+and secure your own key management infrastructure. When you create an encrypted EBS volume and attach it to a supported
+ instance type, the following types of data are encrypted:
 * Data at rest inside the volume
 * All data moving between the volume and the instance
 * All snapshots created from the volume
@@ -551,11 +599,17 @@ the following types of data are encrypted:
 
 EBS encrypts your volume with a data key using the **industry-standard AES-256**(AES-256-XTS) algorithm.
 
-Amazon EBS encryption uses AWS Key Management Service (AWS KMS) customer master keys (CMKs) when creating encrypted volumes and any snapshots created from them. A unique AWS-managed CMK is created for you automatically in each region where you store AWS assets. This key is used for Amazon EBS encryption unless you specify a customer-managed CMK that you created separately using AWS KMS.
+Amazon EBS encryption uses AWS Key Management Service (AWS KMS) customer master keys (CMKs) when creating encrypted volumes 
+and any snapshots created from them. A unique AWS-managed CMK is created for you automatically in each region where you
+ store AWS assets. This key is used for Amazon EBS encryption unless you specify a customer-managed CMK that you created separately using AWS KMS.
 
-You cannot change the CMK that is associated with an existing snapshot or encrypted volume. However, you can associate a different CMK during a snapshot copy operation so that the resulting copied snapshot uses the new CMK.
+You cannot change the CMK that is associated with an existing snapshot or encrypted volume. However, you can associate 
+a different CMK during a snapshot copy operation so that the resulting copied snapshot uses the new CMK.
 
-Because of security constraints, you cannot directly restore an EBS volume from a shared encrypted snapshot that you do not own. You must first create a copy of the snapshot, which you will own.
+To encrypt unencrypted snapshot you have to copy that snapshot and choose option encrypt
+
+Because of security constraints, you cannot directly restore an EBS volume from a shared encrypted snapshot that you do
+ not own. You must first create a copy of the snapshot, which you will own.
 
 To migrate data from unencrypted volume to encrypted volume you can: 
 * Attach unencrypted and encrypted volumes to certain ec2i
@@ -568,20 +622,30 @@ To migrate data from unencrypted volume to encrypted volume you can:
 
 #### How EBS use KMS? 
 The following explains how Amazon EBS uses your CMK:
-* When you create an encrypted EBS volume, Amazon EBS sends a **GenerateDataKeyWithoutPlaintext** request to AWS KMS, specifying the CMK that you chose for EBS volume encryption.
-* AWS KMS generates a new data key, encrypts it under the specified CMK, and then sends the encrypted data key to Amazon EBS to store with the volume metadata.
-* When you attach the encrypted volume to an EC2 instance, Amazon EC2 sends the encrypted data key to AWS KMS with a Decrypt request.
+* When you create an encrypted EBS volume, Amazon EBS sends a **GenerateDataKeyWithoutPlaintext** request to AWS KMS, 
+specifying the CMK that you chose for EBS volume encryption.
+* AWS KMS generates a new data key, encrypts it under the specified CMK, and then sends the encrypted data key to 
+Amazon EBS to store with the volume metadata.
+* When you attach the encrypted volume to an EC2 instance, Amazon EC2 sends the encrypted data key to AWS KMS with
+ a Decrypt request.
 * AWS KMS decrypts the encrypted data key and then sends the decrypted (plaintext) data key to Amazon EC2.
-* Amazon EC2 uses the plaintext data key in hypervisor memory to encrypt disk I/O to the EBS volume. The data key persists in memory as long as the EBS volume is attached to the EC2 instance.
+* Amazon EC2 uses the plaintext data key in hypervisor memory to encrypt disk I/O to the EBS volume. The data key 
+persists in memory as long as the EBS volume is attached to the EC2 instance.
 
 ###EBS Performance
-EBS volumes created from EBS snapshots must be initialized. &quot;Initialized&quot; occures the first time a storage block on the volume is read - and the performance impact can be implaced by up to 50%
+EBS volumes created from EBS snapshots must be initialized. &quot;Initialized&quot; occures the first time a storage
+ block on the volume is read - and the performance impact can be implaced by up to 50%
 
-You can avoid this performance hit in a production environment by reading from all of the blocks on your volume before you use it; this process is called initialization. For a new volume created from a snapshot, you should read all the blocks that have data before using the volume.
+You can avoid this performance hit in a production environment by reading from all of the blocks on your volume before
+ you use it; this process is called initialization. For a new volume created from a snapshot, you should read all the
+  blocks that have data before using the volume.
     
 #### IOPS
      
-IOPS are a unit of measure representing input/output operations per second. The operations are measured in KiB, and the underlying drive technology determines the maximum amount of data that a volume type counts as a single I/O. I/O size is capped at 256 KiB for SSD volumes and 1,024 KiB for HDD volumes because SSD volumes handle small or random I/O much more efficiently than HDD volumes.
+IOPS are a unit of measure representing input/output operations per second. The operations are measured in KiB, and the 
+underlying drive technology determines the maximum amount of data that a volume type counts as a single I/O. I/O size is
+ capped at 256 KiB for SSD volumes and 1,024 KiB for HDD volumes because SSD volumes handle small or random I/O much more 
+ efficiently than HDD volumes.
 
 #### Amazon EBS Performance Tips
 * Use EBS-Optimized Instances
@@ -591,18 +655,27 @@ IOPS are a unit of measure representing input/output operations per second. The 
 ### Root device volume
 Each instance that you launch has an associated root device volume, either an Amazon EBS volume or an instance store volume.
 
-You can use block device mapping to specify additional EBS volumes or instance store volumes to attach to an instance when it's launched. You can also attach additional EBS volumes to a running instance; see Attaching an Amazon EBS Volume to an Instance. However, the only way to attach instance store volumes to an instance is to use block device mapping to attach them as the instance is launched.
+You can use block device mapping to specify additional EBS volumes or instance store volumes to attach to an instance when
+ it's launched. You can also attach additional EBS volumes to a running instance; see Attaching an Amazon EBS Volume to an 
+ Instance. However, the only way to attach instance store volumes to an instance is to use block device mapping to attach 
+ them as the instance is launched.
 
 Root device volume types: Instance store and EBS-backed store
 
 #### Instance store volume 
 
-An instance store provides temporary block-level storage for your instance. This storage is located on disks that are physically attached to the host computer. Instance store is ideal for temporary storage of information that changes frequently, such as buffers, caches, scratch data, and other temporary content, or for data that is replicated across a fleet of instances, such as a load-balanced pool of web servers.
+An instance store provides temporary block-level storage for your instance. This storage is located on disks that are 
+physically attached to the host computer. Instance store is ideal for temporary storage of information that changes 
+frequently, such as buffers, caches, scratch data, and other temporary content, or for data that is replicated across
+ a fleet of instances, such as a load-balanced pool of web servers.
 
-An instance store consists of one or more instance store volumes exposed as block devices. The size of an instance store as well as the number of devices available varies by instance type. While an instance store is dedicated to a particular instance, the disk subsystem is shared among instances on a host computer.
+An instance store consists of one or more instance store volumes exposed as block devices. The size of an instance store
+ as well as the number of devices available varies by instance type. While an instance store is dedicated to a particular
+  instance, the disk subsystem is shared among instances on a host computer.
 
 
-You can specify instance store volumes for an instance only when you launch it. You can't detach an instance store volume from one instance and attach it to a different instance.
+You can specify instance store volumes for an instance only when you launch it. You can't detach an instance store volume
+ from one instance and attach it to a different instance.
 
 The data in an instance store persists only during the lifetime of its associated instance. 
 If an instance reboots (intentionally or unintentionally), data in the instance store persists. 
@@ -616,9 +689,12 @@ However, data in the instance store is lost under any of the following circumsta
  * The instance terminates
 
 
-Therefore, do not rely on instance store for valuable, long-term data. Instead, use more durable data storage, such as Amazon S3, Amazon EBS, or Amazon EFS.
+Therefore, do not rely on instance store for valuable, long-term data. Instead, use more durable data storage, such as
+ Amazon S3, Amazon EBS, or Amazon EFS.
 
-With AMIs backed by instance store, you're charged for instance usage and storing your AMI in Amazon S3. With AMIs backed by Amazon EBS, you're charged for instance usage, Amazon EBS volume storage and usage, and storing your AMI as an Amazon EBS snapshot.
+With AMIs backed by instance store, you're charged for instance usage and storing your AMI in Amazon S3. With AMIs 
+backed by Amazon EBS, you're charged for instance usage, Amazon EBS volume storage and usage, and storing your AMI 
+as an Amazon EBS snapshot.
 
 #### EBS volumes - SEPARATE SECTION -> BELOW ...
 

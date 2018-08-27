@@ -22,6 +22,7 @@
 |DYNAMO                    |                |
 |COGNITO                   |                |
 |KMS                       |                |
+|RDS                       |                |
 |53                        |                |
 |SNS                       |                |
 |SQS                       |                |

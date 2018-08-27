@@ -5,62 +5,11 @@
         EC2:R  >>  Auto Scaling group
         EC2:R  >>  Elastic IP in private vs public subnet
         AMI:R  >>  From what you can create an image(EC2 instance, main volume, ebs volume, snapshot)
-
+        CloudWatch:R >> Whole service motherfucker SUKA BLYAT
         EBS:R  >>  do task in lab(Web academy  - EBS) about measuring IOPS with filesystem. Understand average numbers in IOPS, alernatives
         EBS:R  >>  Encryption: AWS managed keys, encrypted filesystem (customer managed keys) . encrypted data at application side(Apps encrypt/desrypt data on client side | customer managed keys | Third party assistence)
 
-        SNAP:R  >>  Snapshot states
-
 --->
-        SNAP:R  >>  When you cant delete snapshot
-        SNAP:R  >>  EBS - snapshots, encryption, attaching and detaching
-        SNAP:M  >>  To encrypt unencrypted snapshop you have to copy that snapshot and shoose option enctypt
-
-
-
-        VPC:R  >>  public address to access the instance and NAT in subnet, Cover Ryan's Video that should suffice.
-        VPC:R  >>  NAT instance vs nat gateway
-        VPC:R:M  >>  VPC Limits (5 vpc, 5 internet gateways, 50 customer gateways per region, 50 vpn, 200 route tables per region, 5 elastic IP addresses, 500 security groups per VPC, 50 rules per security group, 5 security groups per network interface)
-        VPC:IG:M  >>  You can't detach internet gateway when somebody use resources in VPC
-        VPC:RT:M  >>  Route table contains set of rules, called routes, that are used to determine where network traffic is directed.
-        VPC:RT:R  >>  Main route table
-        VPC:SUB:M  >>  Subnets cannot span availability zones
-        VPC:R  >>  Intenet gateway - connec5 tto ninternet
-        VPC:R  >>  VPC - connect to VPN (propbably not deep)
-        VPC:R  >>  Direct connect
-        VPC:R  >>  VPC peering, connect to other vpc
-        VPC:R  >>  Statefull vs stateless (ACL + SG)
-        VPC:R  >>  Routes : Associated with subnets
-        VPC:R  >>  Routes: Route to Internet gateway to get internet (public subnet)
-        VPC:R  >>  Routes: virtual private gateway to get on premice network
-        VPC:R  >>  Route: peering connections to get peered VPC
-        VPC:R  >>  Main route table
-        VPC:M  >>  When you launch an instance into a VPC, we provide the instance with a private DNS hostname, and a public DNS hostname if the instance receives a public IPv4 address. If domain-name-servers in your DHCP options is set to AmazonProvidedDNS, the public DNS hostname takes the form ec2-public-ipv4-address.compute-1.amazonaws.com for the us-east-1 region, and ec2-public-ipv4-address.region.compute.amazonaws.com for other regions. The private hostname takes the form ip-private-ipv4-address.ec2.internal for the us-east-1 region, and ip-private-ipv4-address.region.compute.internal for other regions. To change these to custom DNS hostnames, you must set domain-name-servers to a custom DNS server.
-        VPC:R  >>  Troubleshooting Conectivity: Outside VPC to instance in VPC :: Gateway(IGW or VPG) attached, Routing rules from corp network to VPC, Routing table on VPC or subnet, EIP or public IP on instance, NACLs, SG, Os-level firewals
-        VPC:M  >>  Subnet VPC: 200
-        VPC:M  >>  Gateway VPC Endpoints
-
-
-
-
-
-
-        DYNAMO:R  >>  WCU
-        DYNAMO:R  >>  RCU
-        DUNAMO:R  >>  LSI
-        DYNAMO:R  >>  GSI
-
-        DYNAMO:R  >>  Limits
-        DYNAMO:R  >>  Errors
-        DYNAMO:R  >>  Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
-        DYNAMO:R  >>  understanding of how global and local indices relate to provisioned throughput
-        DYNAMO:R  >>  ProjectionExpression parameter
-        DYNAMO:R  >>  DynamoDb &amp; IAM. Conditions .(eq, else)
-        DYNAMO:R  >>  dynamoLLeadingKeys
-        DYNAMO:R  >> Throughput error (like if not Table then what is the cause)
-        DYNAMO:R  >>   hash and range keys .  how to optimize each for specific queries for the best performance
-        DYNAMO:R  >>   number of records.
-        DYNAMO:R  >>   Optimizing performance for DynamoDB
 
         S3:R  >>  Signed URLs with expiry dates.
         S3:R  >>  S3 bucket name requirement(DNS complient, else)
@@ -118,8 +67,8 @@
         EFS:M  >>  Benefits of EFS: * Can be accessed by multiple EC2I at the same time, * Multiple EC2I can access same data, * Can be mounted to on-premise servers(see AWS Direct Connect) , * Allow migrate data to and from on-oremice servers, * Can scale on petabytes in size, maintaining law latency, * Only pay for what you use
         EFS:M  >>  You can mount EFS to EC2 on creation(like EBS volumes), but you can connect it via CLI when you connected to instance through SSH or using User Data script
 
-        EB:R  >>   Resources that Elastic Beanstalk can create
-        EB:R  >>  SUpported Elastic Beanstalk Platforms
+        EB:R  >>  Resources that Elastic Beanstalk can create
+        EB:R  >>  Supported Elastic Beanstalk Platforms
 
         STS:R  >>  Request for credentials to STS API, can be through web console
         STS:R  >>  Requested credentials of STS API call, contains: Sec. Token, Access Key ID, Secret Access Key
@@ -130,6 +79,9 @@
         ELB:R  >>  Network LB
         ELB:R  >>  TLS termination in App load balancer. (+ Q: Is that feature presented in Network LB)
         ELB:R  >>  URL pattern like ....sometext.elb.amazonaws.com or sth
+        ELB:R  >>  Cross-Zone Load Balancing
+        ELB:M  >>  An Application Load Balancer must be deployed into at least two subnets.
+
         LAMBDA:R  >>  Packages
         LAMBDA:R  >>  VPC for Lambda. What access lambda can get without roles
         LAMBDA:R  >>  Review all API actions
@@ -172,7 +124,8 @@
         IAM:M  >>   When a new AWS root account is created, it is &quot;best practice&quot; to complete these 5 steps: 1. Delete your root access keys 2. Activate MFA on your root account 3. Create individual IAM users 4 User groups to assign persmissions 5. Apply an IAM password policy
         IAM:M  >>  IAM do not restrict rrafic, it restrict API calls and actions
         IAM:R  >>  Options on authenticating using LDAP together with IAM.
-
+        IAM:R  >>  assumerolewithwebidentity
+        IAM:R  >>  Web Identity Federation
         ECS:M  >>  If you use Amazon ECS CLI (not a AWS CLI) then you have benefits as support of Docker Compose
         ECS:R  >>  ECR repository police and IAM user access policy
 
@@ -208,6 +161,9 @@
         AWS:R  >>  Troubleshooting Limits Issues :: * AWS has many soft limits, * Plus a few hard limits.  .
         AWS:R  >>  Troubleshooting Limits Issues :What if you achive a lmit (how to increase)
         53:M  >>  Record types : * A  : IPv4 * AAAA : IPv6, CAA : A CAA record lets you specify which certificate authorities (CAs) are allowed to issue certificates for a domain or subdomain.(docs ref: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html?shortFooter=true#CAAFormat) * CNAME : Specify domain, such ass 'hostname.example.com' * MX : Used to specify email servers with priorities (e.g. '10 mail.example.com' ) * NS :  identifies the name servers for the hosted zone (e.g. 'ns-1.example.com') * PTR : the same as CNAME * SOA : A start of authority (SOA) record provides information about a domain and the corresponding Amazon Route 53 hosted zone (e.g. ns-2048.awsdns-64.net hostmaster.awsdns.com 1 1 1 1 60) *
+        53:R  >>  Private Hosted Zone
+        53:R >> Price for types of record
+
         AWS:R  >>  Remember all various service parameter values e.g. timers, max limits, etc. for S3, SQS, DynamoDB
 
         AWS:R  >>  For what languages AWS provide SDKs
@@ -226,6 +182,9 @@
         AWS:R  >>  VPN connection
         AWS:R  >>  AWS Direct Connect
         AWS:R  >>  what is your responsibility in the shared responsibility mode
+
+        SNOWBALL:R >>  Trusted Platform Module (TMP)
+
 ----------------------------
 Access through OnPremice -> LDAP -> AWS -> IAM/STS -> S3(using temporal .. sth)
 Registration through GCM and SNS
@@ -243,3 +202,4 @@ How many Enge location aws have. Is that bigger than regions number
 There is no BatchGetItems. there is only BatchGetItem ( without S you dumb-ass)
 
 
+A/B testing ещ non-aws definitions

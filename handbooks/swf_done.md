@@ -1,9 +1,13 @@
 # SWF
 
-In addition to a core SDK that calls service APIs, Amazon SWF provides the AWS Flow Framework with which you can write distributed applications using programming constructs that structure asynchronous interactions.
+In addition to a core SDK that calls service APIs, Amazon SWF provides the AWS 
+Flow Framework with which you can write distributed applications using programming 
+constructs that structure asynchronous interactions.
 
-Workflow have a state. When state is changed then decider can determine next activity to perform.
+Workflow have a state. When state is changed then decider can determine next
+ activity to perform.
 
+Each workflow execution can run for a maximum of 1 year.
 ## Workflow-s
 
 Using the Amazon Simple Workflow Service (Amazon SWF), you can implement
@@ -20,11 +24,15 @@ consistent record of every event that occurred since the workflow execution star
 
 The workflow history has several key benefits:
 
-* It enables applications to be stateless, because all information about a workflow execution is stored in its workflow history.
+* It enables applications to be stateless, because all information about a workflow
+ execution is stored in its workflow history.
 
-* For each workflow execution, the history provides a record of which activities were scheduled, their current status, and their results. The workflow execution uses this information to determine next steps.
+* For each workflow execution, the history provides a record of which activities were 
+scheduled, their current status, and their results. The workflow execution uses 
+this information to determine next steps.
 
-* The history provides a detailed audit trail that you can use to monitor running workflow executions and verify completed workflow executions.
+* The history provides a detailed audit trail that you can use to monitor running
+ workflow executions and verify completed workflow executions.
 
 ## Actors
 
@@ -36,15 +44,21 @@ The workflow history has several key benefits:
 
 * Deciders
 
-  A decider is an implementation of a workflow's coordination logic. Deciders control the flow of activity tasks in a workflow execution. Whenever a change occurs during a workflow execution, such as the completion of a task, a decision task including the entire workflow history will be passed to a decider. 
+  A decider is an implementation of a workflow's coordination logic. Deciders 
+  control the flow of activity tasks in a workflow execution. Whenever a change 
+  occurs during a workflow execution, such as the completion of a task, a decision
+   task including the entire workflow history will be passed to a decider. 
 
 * Activity Workers
 
-  An activity worker is a process or thread that performs the activity tasks that are part of your workflow. The activity task represents one of the tasks that you identified in your application.
+  An activity worker is a process or thread that performs the activity tasks that 
+  are part of your workflow. The activity task represents one of the tasks that you
+   identified in your application.
 
 ## Tasks 
 
-Amazon SWF interacts with activity workers and deciders by providing them with work assignments known as tasks. There are three types of tasks in Amazon SWF:
+Amazon SWF interacts with activity workers and deciders by providing them with work
+ assignments known as tasks. There are three types of tasks in Amazon SWF:
 
 * Activity task 
   
@@ -63,10 +77,20 @@ Amazon SWF interacts with activity workers and deciders by providing them with w
   A Decision task tells a decider that the state of the workflow execution has
    changed so that the decider can determine the next activity that needs to be 
    performed. The decision task contains the current workflow history.
+    
    
-   
+## Task lists  (remember)
+
+Key points to note about Amazon SWF ‘Task Lists’
+– Separate lists need to be used for activity tasks and decision tasks
+– Tasks can only be scheduled on a single task list
+– Tasks are not shared across lists
+– Task lists need to be scoped to a specific AWS region and SWF domain
+
 ## Amazon SWF Domains
-Domains provide a way of scoping Amazon SWF resources within your AWS account. All the components of a workflow, such as the workflow type and activity types, must be specified to be in a domain.
+Domains provide a way of scoping Amazon SWF resources within your AWS account. All 
+the components of a workflow, such as the workflow type and activity types, must be 
+specified to be in a domain.
 
 
 ## SWF FAQ
@@ -81,8 +105,10 @@ applications. If Step Functions does not fit your needs, then you should
 consider Amazon Simple Workflow (SWF).
 
 ## AWS Flow Framework
-The AWS Flow Framework is an enhanced SDK for writing distributed, asynchronous programs that can run as workflows 
-on Amazon SWF. It is available for the Java and Ruby programming languages, and it provides classes that simplify 
+The AWS Flow Framework is an enhanced SDK for writing distributed, asynchronous 
+programs that can run as workflows 
+on Amazon SWF. It is available for the Java and Ruby programming languages, and
+ it provides classes that simplify 
 writing complex distributed programs.
 
 ## SWF Limits 

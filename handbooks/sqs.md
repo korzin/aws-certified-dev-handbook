@@ -4,6 +4,7 @@
 
 The default (minimum) visibility timeout for a message is 30 seconds. The maximum is 12 hours.
 
+If you need to implement priority in Q, the you better two create two different Q;
 ## Brief description and benefits
 
 * Security 
@@ -50,3 +51,5 @@ The default (minimum) visibility timeout for a message is 30 seconds. The maximu
 ## API 
 
 SetQueueAttributes  to set attributes
+
+ChangeMessageVisibility change msg visibility

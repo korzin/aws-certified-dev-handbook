@@ -6,6 +6,8 @@ DynamoDB Throughput Exceeded: ProvisionedThroughputExceededException  ,
 
 DynamoDB doesn’t consume capacity units if it’s just modifying Table
 
+With point-in-time recovery, you can restore that table to any point in time during the last 35 days.
+   
 ## Basics
 
 ### Atomic Counters
@@ -38,25 +40,125 @@ Streams doesn't support encryption
 
 ### GSI (Global secondary index)
 
+Every global secondary index must have a partition key, and can have an **optional** sort key. 
+
 You can create GSI after table is created
 
-GSI consume read and write capacity independently from the main table and have their WCU and RCU provided thoughput
+GSI consume read and write capacity independently from the main table and have their WCU and RCU provided throughput
 
 You can't do strongly consistent reads on GSI.
 
+
+Example QUERY for GSI: 
+               
+        {
+            "TableName": "GameScores",
+            "IndexName": "GameTitleIndex",
+            "KeyConditionExpression": "GameTitle = :v_title",
+            "ExpressionAttributeValues": {
+                ":v_title": {"S": "Meteor Blasters"}
+            },
+            "ProjectionExpression": "UserId, TopScore",
+            "ScanIndexForward": false
+        }
 
 ### LSI (Local secondary index)
 
 LSI Primary Keys are composite keys (partition and sort key)
  
-Each LSI act as another sort key
+Local Secondary Index is an index that has the same partition key as the table, 
+but a different sort key.
+
+Each LSI act as another sort key    
 
 Each LSI kept in sync with the base table
  
-LSIs must be created when table is created, you can create LSI and attach to existing table
+LSI must be created when table is created, you can't create LSI and attach to existing table
   
 Read and Write capacity for LSI is taken from the capacity of the base table
-  
+
+
+Using Sort Keys for Version Control
+
+Example QUERY for LSI : 
+        
+        {   
+            "TableName": "Thread",
+            "IndexName": "LastPostIndex",
+            "ConsistentRead": false,
+            "ProjectionExpression": "Subject, LastPostDateTime, Replies, Tags",
+            "KeyConditionExpression": 
+                "ForumName = :v_forum and LastPostDateTime between :v_start and :v_end",
+            "ExpressionAttributeValues": {
+                ":v_start": {"S": "2015-08-31T00:00:00.000Z"},
+                ":v_end": {"S": "2015-11-31T00:00:00.000Z"},
+                ":v_forum": {"S": "EC2"}
+            }
+        }
+
+### Attribute Projections(for both LSI and GSI)
+
+Every local secondary index automatically contains the partition and sort keys from its base table; 
+you can optionally project non-key attributes into the index.
+
+A projection is the set of attributes that is copied from a table into a secondary index.
+ The partition key and sort key of the table are always projected into the index; you can project other
+  attributes to support your application's query requirements. 
+
+Attribute prijections cases while creating : KEYS_ONLY, INCLUDE(selected attributes), ALL
+
+## Global tables 
+Amazon DynamoDB global tables provide a fully managed solution for deploying a multi-region,
+ multi-master database, without having to build and maintain your own replication solution. 
+ 
+A global table is a collection of one or more replica tables, all owned by a single AWS account.
+ 
+
+
+## Query
+
+The maximum size of the results returned by a Query operation is 1 MB. 
+This limit applies before any FilterExpression is applied to the results.
+
+Query table with Primary key (simple or composite key)
+
+**expression-attribute-values** - to setup value of variables 
+
+    aws dynamodb query \
+        --table-name Thread \
+        --key-condition-expression "ForumName = :name" \
+        --expression-attribute-values  '{":name":{"S":"Amazon DynamoDB"}}'
+ 
+
+A Query operation always returns a result set. If no matching items are found, the result set will be empty.
+
+Query results are always sorted by the sort key value.
+
+**filter-expression** - to filter by every attribute after fetched from db
+
+    aws dynamodb query \
+        --table-name Thread \
+        --key-condition-expression "ForumName = :fn" \
+        --filter-expression "#v >= :num" \
+        --expression-attribute-names '{"#v": "Views"}' \
+        --expression-attribute-values file://values.json
+     
+**LastEvaluatedKey** - required for pagination 
+
+## Scan 
+
+A Scan operation reads every item in a table or a secondary index. By default, a Scan operation returns
+ all of the data attributes for every item in the table or index. You can use the ProjectionExpression
+  parameter so that Scan only returns some of the attributes, rather than all of them.
+
+**filter-expression** - the same goal as in Query
+
+**'Limit'** - parameter to limit results 
+
+**LastEvaluatedKey** - the same goal as in Query
+
+`Parallel scan ` : operation can logically divide a table or secondary index into multiple segments, 
+with multiple application workers scanning the segments in parallel. Dividing the same way as in pagination
 
 
 ## Primary key TODO 
@@ -255,6 +357,22 @@ The following is a complete list of DynamoDB data type descriptors:
 * NS – Number Set
 * BS – Binary Set
 
+## Streams 
+
+Some usecases: 
+* Keeping in sync two tables in different regions
+* App reads and write to dynamo table. Use streams to provide real-time usage metrics.
+* Act as triggers for different purposes
+
+Streams available in the logs for 24 hours.
+
+#### Streams guarantees
+
+* **Each stream record appears exactly once in the stream**
+
+* For each item that is modified in a DynamoDB table, the stream records appear in the 
+**same sequence as the actual modifications** to the item.
+
 ## API
 
 ### Quick list of some API with or without description
@@ -437,6 +555,14 @@ HTTP Status Code: 400
   
 ## Best Practices for DynamoDB
 
+General design principles in DynamoDB recommend that you keep the number of tables you use to a minimum.
+
+**`Important` In general, you should maintain as few tables as possible in a DynamoDB application. 
+Most well-designed applications require only one table. Exceptions include cases where high-volume 
+time series data are involved, or datasets that have very different access patterns. A single table 
+with inverted indexes can usually enable simple queries to create and retrieve the complex hierarchical 
+data structures required by your application.**
+
 ### Partition Keys  
 
 Partition key should looks like PersonId, DeviceId, CustomerId. 
@@ -446,14 +572,27 @@ Be aware of projects where some subset of Persons, Devices, else requires access
   
 Add random suffixes to partition key. 
 Example: (if partion key is a date of order)
-2014-07-09.1, 2014-07-09.2, and so on, through 2014-07-09.200.
+2014-07-09.1, 2014-07-09.2, and so on, USE random suffix like this 2014-07-09`.200`.
 But now you have to make several queries to combine orders that was created in specific day.
 
-#### Calculated suffixes 
+#### Queries and Scans 
+Scan retriev only 1mb, therefore API will call scan many times. And it can cause ProvisionedThroughputExceeded
 
-.... 
 
 
+#### Indexes 
+
+* In general, you should use global secondary indexes rather than local secondary indexes.
+    
+    The exception is when you need strong consistency in your query results, which a local 
+ secondary index can provide but a global secondary index cannot (global secondary index
+  queries only support eventual consistency).
+
+* Keep the number of indexes to a minimum. 
+   
+   Don't create secondary indexes on attributes that you don't query often. Indexes that are seldom used contribute to increased storage and I/O costs without improving application performance.
+  
+*  Avoid indexing tables that experience heavy write activity.
   
   
   
@@ -466,8 +605,7 @@ But now you have to make several queries to combine orders that was created in s
   
   
   
-  
-  
+    
   
   
   

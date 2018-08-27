@@ -12,3 +12,8 @@ AWS Lambda
 * etc. 
     
   
+## Lambda pricing
+
+Lambda is priced based on number of requests and Duration 
+of code execution considering memory that is allocated to the function.
+
