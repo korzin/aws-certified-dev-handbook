@@ -1,5 +1,21 @@
 #EC2 Scope
 
+Dense-storage instances are designed that require high sequential
+ read and write access to large data sets like Hadoop distributed computing,
+  massively parallel processing data warehousing, and log processing applications.
+
+You will not be charged for a partial hour of usage for
+ Spot Instance if it is terminated by Amazon. However, if you 
+ terminate the instance yourself, you will be charged for any hour
+  in which the instance ran.
+  
+  
+Yes, you need to enable auto-assign public IPv4 
+address under the ‘Modify auto-assign IP Settings’
+
+`aws ec2 describe-instances` is the command to use to describe all your running instances
+
+
 ## Amazon Machine Images (AMI)
 
  Display AMI: DescribeImages -Provides the information required to launch an instance.
@@ -310,7 +326,12 @@ D2 and H1 instances suited for:
 
 If you require high processing capability, you'll benefit from using accelerated computing instances, which provide access to hardware-based compute accelerators such as Graphics Processing Units (GPUs) or Field Programmable Gate Arrays (FPGAs). Accelerated computing instances enable more parallelism for higher throughput on compute-intensive workloads.
 
+### Auto-scaling TODO
 
+You can add an IAM role as a parameter in an Auto Scaling launch configuration 
+and create the Auto Scaling group with the EC2 launch configuration. All EC2 
+instances launched in an Auto Scaling group that is associated with the IAM role
+ will have the role to perform the read/write operation.
 ### Instance Purchasing Options
 
 #### Purchasing types: 
@@ -403,7 +424,10 @@ A cluster placement group is a logical grouping of instances within a single Ava
 Cluster placement groups are recommended for applications that benefit from low network latency, high network
  throughput, or both, and if the majority of the network traffic is between the instances in the group.
  
- 
+ A cluster placement group offers 10Gbps Ethernet bandwidth 
+ connectivity between instances in the group. If members address each other using their 
+ public IPv4 addresses, throughput drops to 5 Gbps or less.
+  
 #### Spread Placement Groups
 A spread placement group is a group of instances that are each placed on distinct underlying hardware.
 

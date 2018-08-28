@@ -9,6 +9,9 @@ Max number of Parameter: 60
 
 Max number of stacks per region is 200
 
+In most cases, you must fix the error that causes
+ the update rollback to fail before you can continue to roll back your stack. 
+
 If error occur during creation of a stack, ROLLBACK_IN_PROGRESS an then ROLLBACK_COMPLETE statuses appear
 ## Cloud formation concepts
 

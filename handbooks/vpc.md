@@ -101,7 +101,7 @@ Up to 500 security groups per VPC
 
 5 security groups per network interface 
 
-Up to 200 usbnets per VPC
+Up to 200 subnets per VPC
 
 Up to 5 IPv4 CIDR blocks per VPC
 

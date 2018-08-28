@@ -1,5 +1,26 @@
 # Amazon RDS(Relational Database Service)
 
+
+If your DB instance is not in a VPC, you can use the AWS Management
+ Console to easily move your DB instance into a VPC. You can also take 
+ a snapshot of your DB Instance outside VPC and restore it to VPC by
+  specifying the DB Subnet Group you want to use.
+
+When you restore a snapshot, you cannot restore to the existing DB 
+instance; you will have to restore to a new instance.
+
+MS SQL Server Express and Web editions can range in size from 100 GB to 4 TB. 
+SQL Server Standard and Enterprise editions can range in size from 200 GB to 4 TB.
+
+ Amazon RDS for MySQL, MariaDB and PostgreSQL allow you to add up to 5 read replicas to each DB Instance.
+ 
+ Read Replicas maybe called as Sql replicas. And remember that Aurora Replicas os not the same thing as read replicas
+ 
+ A database parameter group (DB Parameter Group) acts as a “container” for engine 
+ configuration values that can be applied to one or more DB Instances. If you create 
+ a DB Instance without specifying a DB Parameter Group, a default DB Parameter Group
+  is used.
+
 ## What RDS do
 
 Amazon Relational Database Service 

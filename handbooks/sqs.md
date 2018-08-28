@@ -5,6 +5,11 @@
 The default (minimum) visibility timeout for a message is 30 seconds. The maximum is 12 hours.
 
 If you need to implement priority in Q, the you better two create two different Q;
+
+Messages can be stored in the queue `1 minute < t <  to 14 days` . The time is customizable. 
+The default setting is `4 days`. `Once message limit is met, messages are automatically deleted.`
+
+
 ## Brief description and benefits
 
 * Security 

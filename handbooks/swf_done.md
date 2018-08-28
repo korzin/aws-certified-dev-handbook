@@ -8,6 +8,19 @@ Workflow have a state. When state is changed then decider can determine next
  activity to perform.
 
 Each workflow execution can run for a maximum of 1 year.
+
+You can have a maximum total of 10,000 workflows and activity 
+type registered in each domain.'
+
+Tasks that are available are returned as responses to the deciders and activity
+ workers. Should a task not be immediately available, Amazon SWF will hold the
+  TCP connection for 60 seconds in case a new task becomes available.
+  
+You can schedule up to 100 activity tasks in one decision
+  
+Activity workers are processes that perform tasks identified in each application. 
+Activity workers will poll Amazon SWF for new tasks appropriate for that worker to perform. Once it receives a task, it will process the task to completion and report the result to Amazon SWF. The worker then polls for a new task.
+  
 ## Workflow-s
 
 Using the Amazon Simple Workflow Service (Amazon SWF), you can implement

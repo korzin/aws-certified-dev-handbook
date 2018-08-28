@@ -10,7 +10,8 @@
         EBS:R  >>  Encryption: AWS managed keys, encrypted filesystem (customer managed keys) . encrypted data at application side(Apps encrypt/desrypt data on client side | customer managed keys | Third party assistence)
 
 --->
-
+        S3:R  >>  Presigned url + its usecases
+        S3:M  >>  To disable automated backups for a DB instance, set the backup retention parameter to 0; e.g. using the API – BackupRetentionPeriod = 0
         S3:R  >>  Signed URLs with expiry dates.
         S3:R  >>  S3 bucket name requirement(DNS complient, else)
         S3:R  >>  Region, where s3 store data
@@ -25,6 +26,7 @@
         S3:R  >>  Gateway-Cached Volumes , Gateway-Storage volumes
         S3:R  >>  Performance
         S3:R  >>  (SSE-S3)
+        S3:R:M  >>  Vault lock by Amazon Glasier(Vault Lock allows you to easily deploy and enforce compliance controls on individual Glacier vaults via a lockable policy (Vault Lock policy). Once locked, the Vault Lock policy becomes immutable and cannot be deleted or altered.)
         S3:R  >>  Partitions, not too deep
         S3:R  >>  Mixed request workloads(keys etc)
         S3:R  >>  S3 Intensive workloadss
@@ -52,6 +54,8 @@
         S3:R  >>  If you encrypt a bucket on S3, what type of encryption does AWS use?
         S3:M  >>   What is the largest size file you can transfer to S3 using a PUT operation? 5GB
         S3:M  >>  Max object size in S3 is 5 Tb. Min is 0 bytes
+        S3:M  >>  Setup a bucket lifecycle rule using the AbortIncompleteMultipartUpload action to remove incomplete parts of a multipart upload
+
 
         SQS:R  >>  SQS message formats and properties
         SQS:M  >>  SQS message retained: 14 days  ,SQS message: 256 KB of text in any format (10 items max)  ,SQS timeout: 30 seconds (default) 12 hours (max)  ,SQS long polling: 20 seconds(default/max) 1 sec(min)  ,SQS is PCI DSS certified  ,SQS/SNS visibility: ChangeMessageVisiblity  ,SQS/SNS delete: DeleteMessage
@@ -81,6 +85,9 @@
         ELB:R  >>  URL pattern like ....sometext.elb.amazonaws.com or sth
         ELB:R  >>  Cross-Zone Load Balancing
         ELB:M  >>  An Application Load Balancer must be deployed into at least two subnets.
+        ELB:R:M >> Connection Draining helps to ensure that load balancers stops sending new traffic to to instances that are de-registering or unhealthy while keeping existing connections open to complete transactions.
+        ELB:R:M >> (Research: checkout other types of ELB) For EC2-Classic, The following ports are supported: 25, 80, 443, 465, 587, 1024-65535
+        ELB:M   >> To enable DNS Failover for an ELB endpoint, create an Alias record pointing to the ELB and set the “Evaluate Target Health” parameter to true.
 
         LAMBDA:R  >>  Packages
         LAMBDA:R  >>  VPC for Lambda. What access lambda can get without roles
@@ -163,13 +170,16 @@
         53:M  >>  Record types : * A  : IPv4 * AAAA : IPv6, CAA : A CAA record lets you specify which certificate authorities (CAs) are allowed to issue certificates for a domain or subdomain.(docs ref: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html?shortFooter=true#CAAFormat) * CNAME : Specify domain, such ass 'hostname.example.com' * MX : Used to specify email servers with priorities (e.g. '10 mail.example.com' ) * NS :  identifies the name servers for the hosted zone (e.g. 'ns-1.example.com') * PTR : the same as CNAME * SOA : A start of authority (SOA) record provides information about a domain and the corresponding Amazon Route 53 hosted zone (e.g. ns-2048.awsdns-64.net hostmaster.awsdns.com 1 1 1 1 60) *
         53:R  >>  Private Hosted Zone
         53:R >> Price for types of record
-
+        53:R >> There is a limit of 50 domain names however this limit can be raised by contacting AWS support.
+        53:M >> Direct 75% traffic to one page and 25% to another page. What DNS Routing Policy can help you achieve this? Weighted Round Robin (WRR)
+        53:R:M >> (R: What min and max interval) By default, health check observations are conducted at an interval of 30 seconds. You can optionally select a fast interval of 10 seconds between observations.
+        53:R >> routing technology(e.g. Anycast)
         AWS:R  >>  Remember all various service parameter values e.g. timers, max limits, etc. for S3, SQS, DynamoDB
 
         AWS:R  >>  For what languages AWS provide SDKs
         AWS:R  >>  What types of API you can use with AWS (e.g. SDK, CLI, maybe REST for some services. etc)
         AWS:R  >>  CORS check where it can be used
-
+        AWS:R  >>  WTF is Round Robin
         AWS:R  >>  Abbreviations for AWS exam.. e.g. DR, RPO, RTO, ect
         AWS:M  >>  Encryption: 256-bit Advanced Encryption Standard (AES-256)
 
@@ -184,6 +194,13 @@
         AWS:R  >>  what is your responsibility in the shared responsibility mode
 
         SNOWBALL:R >>  Trusted Platform Module (TMP)
+        53:R >> Trafic policy, trafic flow
+        53:R:M >> Google about this shit, not just remenber. You have configured for Route 53 and wish to configure failover options for your webservers.  What is the sequence of events when failover happens? ANSWER:  Route 53 conducts a health check of your application. If your application fails 4 consecutive health checks as an example, it triggers the next event. Route 53 will disable the resource record for the failed endpoint and no longer serves these records. The failover step ensures that traffic gets routed to health endpoints instead of the failed one.
+        53:R >> Route 53 routing policy
+        53:m >> Latency based routing. You can route traffic based on the lowest network latency for your end users so that your end users can experience a faster response time. You would use this form of routing when you have resources that serve the same functions located in different availability zones or regions.
+
+        IAM:R >>  MFA-Protected API Access
+        SNS:R >> fanout
 
 ----------------------------
 Access through OnPremice -> LDAP -> AWS -> IAM/STS -> S3(using temporal .. sth)

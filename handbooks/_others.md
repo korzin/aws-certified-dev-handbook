@@ -8,6 +8,19 @@ You can clear cache objects before the TTL but you will be charged for this.
  You may choose to do so if your TTL is set for a long duration and you need 
  to distribute an immediate update of your content.
 
+By default, objects stay in edge locations for 24 hours before expiry. You can specify settings for Minimum TTL, 
+Maximum TTL and Default TTL. Note that you control cache duration of individual objects too. Cache-Control Max-age
+ specifies how long you want the object to remain in cache before CloudFront will fetch the object again from the 
+ origin server. The minimum expiration time CloudFront supports is 0 seconds for web distribution and 3600 seconds 
+ for RTMP distributions. The maximum value is 100 years.
+
+Because you cannot stream Adobe Flash multimedia content over HTTP or HTTPS, you must 
+use RTMP distribution. RTMP can stream media files using Adobe Media Server using the
+ Adobe Real-Time Messaging Protocol (RTMP). In addition, the source content must be an 
+ Amazon S3 bucket.
+
+
+
 ### Regional edge
 
 Regional edge caches are CloudFront locations that are deployed globally, close to your viewers. 
@@ -34,6 +47,8 @@ that a value is not stale, but it keeps data from getting too stale and requires
 
 ## Snowball
 
+Snowball has 10Gbps network interfaces with RJ45, SFP+ copper, and SFP+ optical network ports
+
 ### Key Features
 
 * Encryption
@@ -57,7 +72,9 @@ There are many steps involved to decommissioning a datacenter to make sure valua
 CONTENT DISTRIBUTION
 Use Snowball devices if you regularly receive or need to share large amounts of data with clients, customers, or business associates. Snowball devices can be sent directly from AWS to client or customer locations.
 
+### Remember 
 
+Job manifest unlock code is a 25-character code to unlock the job manifest file.
 
 
 
