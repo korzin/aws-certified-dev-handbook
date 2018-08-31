@@ -10,24 +10,7 @@
         EBS:R  >>  Encryption: AWS managed keys, encrypted filesystem (customer managed keys) . encrypted data at application side(Apps encrypt/desrypt data on client side | customer managed keys | Third party assistence)
 
 --->
-        S3:R  >>  Presigned url + its usecases
-        S3:M  >>  To disable automated backups for a DB instance, set the backup retention parameter to 0; e.g. using the API – BackupRetentionPeriod = 0
-        S3:R  >>  Signed URLs with expiry dates.
-        S3:R  >>  S3 bucket name requirement(DNS complient, else)
-        S3:R  >>  Region, where s3 store data
-        S3:M  >>  Bucket limitations: oly 100 buckets within account, Bucket ownership cannot be trandfered once a bucket is created, Can hold unlimited objects
-        S3:R  >>  S3 limitations in details. Is it true that s3 can hold unlimited amount of objects. What if we would speak about Terabytes
-        S3:R  >>  S3 read consistency rules(have to rememeber)
-        S3:R  >>  Have to be aware of http error responces from s3
-        S3:R  >>  s3 Event notification
-        S3:R  >>  Variaty of imports to S3
-        S3:R  >>  When and how S3 break file on chunks when you import large files (>; 5gb)
-        S3:R  >>  Storage gateway
-        S3:R  >>  Gateway-Cached Volumes , Gateway-Storage volumes
-        S3:R  >>  Performance
-        S3:R  >>  (SSE-S3)
-        S3:R:M  >>  Vault lock by Amazon Glasier(Vault Lock allows you to easily deploy and enforce compliance controls on individual Glacier vaults via a lockable policy (Vault Lock policy). Once locked, the Vault Lock policy becomes immutable and cannot be deleted or altered.)
-        S3:R  >>  Partitions, not too deep
+
         S3:R  >>  Mixed request workloads(keys etc)
         S3:R  >>  S3 Intensive workloadss
         S3:R  >>  Other Performance optimization

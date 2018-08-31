@@ -61,16 +61,21 @@ Snowball has 10Gbps network interfaces with RJ45, SFP+ copper, and SFP+ optical 
     unauthorized modifications to the hardware, firmware, or software. AWS inspects every 
     device for any signs of tampering and to verify that no changes were detected by the TPM.
 
-*End-to-End Tracking - no description
+* End-to-End Tracking - no description
+### Use cases 
 
-CLOUD MIGRATION
-If you have large quantities of data you need to migrate into AWS, Snowball is often much faster and more cost-effective than transferring that data over the Internet.
-DISASTER RECOVERY
-In the event that you need to quickly retrieve a large quantity of data stored in Amazon S3, Snowball devices can help retrieve the data much quicker than high-speed Internet.
-DATACENTER DECOMMISSION
-There are many steps involved to decommissioning a datacenter to make sure valuable data is not lost. Snowball can help ensure that your data is securely and cost-effectively transferred to AWS during this process.
-CONTENT DISTRIBUTION
-Use Snowball devices if you regularly receive or need to share large amounts of data with clients, customers, or business associates. Snowball devices can be sent directly from AWS to client or customer locations.
+* CLOUD MIGRATION
+   
+   If you have large quantities of data you need to migrate into AWS, Snowball is often much faster and more cost-effective than transferring that data over the Internet.
+* DISASTER RECOVERY
+   
+   In the event that you need to quickly retrieve a large quantity of data stored in Amazon S3, Snowball devices can help retrieve the data much quicker than high-speed Internet.
+* DATACENTER DECOMMISSION
+   
+   There are many steps involved to decommissioning a datacenter to make sure valuable data is not lost. Snowball can help ensure that your data is securely and cost-effectively transferred to AWS during this process.
+* CONTENT DISTRIBUTION
+   
+   Use Snowball devices if you regularly receive or need to share large amounts of data with clients, customers, or business associates. Snowball devices can be sent directly from AWS to client or customer locations.
 
 ### Remember 
 

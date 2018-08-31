@@ -148,13 +148,24 @@ route table. For more information, see Amazon VPC Limits.
 
 ## Internet Gateway (IG)
 
- You can't detach internet gateway when somebody use resources in VPC
- 
+You can't detach internet gateway when somebody use resources in VPC
+
 ## NAT
 
+### NAT Gateway
 
+A NAT gateway supports bursts of up to 10 Gbps of bandwidth. 
+If you require more than 10 Gbps bursts, you can distribute the 
+workload by splitting your resources into multiple subnets, and 
+creating a NAT gateway in each subnet.
 
 ### NAT instance
+
+Each EC2 instance performs source/destination checks by default. 
+This means that the instance must be the source or destination of 
+any traffic it sends or receives. However, a NAT instance must be able
+to send and receive traffic when the source or destination is not itself.
+Therefore, you must disable source/destination checks on the NAT instance.
 
 #### Disabling Source/Destination Checks
 

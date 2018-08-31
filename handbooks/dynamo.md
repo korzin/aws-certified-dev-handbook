@@ -161,7 +161,7 @@ A Scan operation reads every item in a table or a secondary index. By default, a
 with multiple application workers scanning the segments in parallel. Dividing the same way as in pagination
 
 
-## Primary key TODO 
+## Primary key
 
 Each primary key attribute must be defined as type string, number, or binary.
 
@@ -175,6 +175,10 @@ The following additional constraints apply to primary key attributes that
  (the sort key) is 1024 bytes.
 
 ## Provisioned throughput
+
+Max throughput for each partition is 3000RCU and 1000WCU.
+
+**Calc values:** 
 
  **1 WCU = 1 write of 1 item of 1KB or less per second**
 
@@ -285,10 +289,7 @@ The UpdateTable operation allows you to do one of the following:
 
 Status of tables flow while updating : 
 
-AVAILABLE ----------> UPDATING -------------> AVAILABLE 
-            (still available for queries)
-            
-            
+AVAILABLE ----------> UPDATING -------------> AVAILABLE (available for queries during update)      
             
 ## DynamoDB DataTypes
 

@@ -56,5 +56,6 @@ The default setting is `4 days`. `Once message limit is met, messages are automa
 ## API 
 
 SetQueueAttributes  to set attributes
+GetQueueAttributes  to get attributes 
 
 ChangeMessageVisibility change msg visibility

@@ -19,5 +19,6 @@ The host manager is responsible for:
 * Aggregating events and metrics for retrieval via the console, the API, or the command line
 * Generating instance-level events
 * Monitoring the application log files for critical errors
-* Monitoring the application server• Patching instance components
+* Monitoring the application server
+* Patching instance components
 * Rotating your application’s log files and publishing them to Amazon S3

@@ -138,11 +138,11 @@ The following are the characteristics of security group rules:
   
   Note: You can assign multiple security groups to an instance, therefore an instance can have hundreds of rules that apply. This might cause problems when you access the instance. We recommend that you condense your rules as much as possible.
 
-Use    
+**Use**    
       
       describe-prefix-lists
 
-API command return ** prefix list name and prefix list ID of the service and the IP address range for the service** 
+API command return **prefix list name and prefix list ID of the service and the IP address range for the service** 
 
 **For each rule, you specify the following:**
 
@@ -150,7 +150,9 @@ API command return ** prefix list name and prefix list ID of the service and the
 
 * Port range : For TCP, UDP, or a custom protocol, the range of ports to allow. You can specify a single port number (for example, 22), or range of port numbers (for example, 7000-8000).
 
-ICMP type and code: For ICMP, the ICMP type and code.
+* (Only in case ICMP)  : For TCP, UDP, or a custom protocol, the range of ports to allow. You can specify a single port number (for example, 22), or range of port numbers (for example, 7000-8000).
+
+* ICMP type and code: For ICMP, the ICMP type and code.
 
 * Source or destination: The source (inbound rules) or destination (outbound rules) for the traffic. Specify one of these options:
     * An individual IPv4 address. You must use the /32 prefix length; for example, 203.0.113.1/32.
@@ -446,7 +448,7 @@ per Availability Zone per group.
 ### EBS Volumes
 
 
-To now lose temporal data (such as transaction logs on ec2i) you have to unmount ebs and only then shutdown ecwi
+To not lose temporal data (such as transaction logs on ec2i) you have to unmount ebs and only then shutdown ecwi
 
 An Amazon EBS volume is a durable, block-level storage device that you can attach to a single EC2 instance. 
 
@@ -500,7 +502,7 @@ the data on the volume might be out of sync if there were writes to the volume i
 
 #### Limits 
 
-Limit for number of attached volumes is 40 for Linux and about (16 or 26) for Windows ec2is
+Limit for number of attached volumes is 40 for Linux and 26 for Windows ec2is
 
 Amazon EBS currently supports a maximum volume size of 16 TiB
 

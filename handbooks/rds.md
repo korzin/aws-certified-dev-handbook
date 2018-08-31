@@ -1,10 +1,18 @@
 # Amazon RDS(Relational Database Service)
 
+Migrate your database instances quickly to the another region use cross-region replication.
+ 
+You can Set the `Auto Minor Version Upgrade to “No” ` to prevent any minor upgrades
+from automatically taking place. 
+ 
+You can use the reader endpoint to provide high availability for your read-only
+queries from your DB cluster. You can place multiple Aurora Replicas in different 
+Availability Zones and then connect to the reader endpoint for your read workload.
 
 If your DB instance is not in a VPC, you can use the AWS Management
- Console to easily move your DB instance into a VPC. You can also take 
- a snapshot of your DB Instance outside VPC and restore it to VPC by
-  specifying the DB Subnet Group you want to use.
+Console to easily move your DB instance into a VPC. You can also take 
+a snapshot of your DB Instance outside VPC and restore it to VPC by
+specifying the DB Subnet Group you want to use.
 
 When you restore a snapshot, you cannot restore to the existing DB 
 instance; you will have to restore to a new instance.
@@ -12,14 +20,17 @@ instance; you will have to restore to a new instance.
 MS SQL Server Express and Web editions can range in size from 100 GB to 4 TB. 
 SQL Server Standard and Enterprise editions can range in size from 200 GB to 4 TB.
 
- Amazon RDS for MySQL, MariaDB and PostgreSQL allow you to add up to 5 read replicas to each DB Instance.
- 
- Read Replicas maybe called as Sql replicas. And remember that Aurora Replicas os not the same thing as read replicas
- 
- A database parameter group (DB Parameter Group) acts as a “container” for engine 
- configuration values that can be applied to one or more DB Instances. If you create 
- a DB Instance without specifying a DB Parameter Group, a default DB Parameter Group
-  is used.
+Amazon RDS for MySQL, MariaDB and PostgreSQL allow you to add up to 5 read replicas to each DB Instance.
+
+Read Replicas maybe called as Sql replicas. And remember that Aurora Replicas os not the same thing as read replicas
+
+A database parameter group (DB Parameter Group) acts as a “container” for engine 
+configuration values that can be applied to one or more DB Instances. If you create 
+a DB Instance without specifying a DB Parameter Group, a default DB Parameter Group
+is used.
+
+To disable automated backups for a DB instance, set the backup retention parameter to 0; 
+e.g. using the API – BackupRetentionPeriod = 0
 
 ## What RDS do
 
@@ -46,23 +57,23 @@ public IP address to instance or not.
 Amazon RDS uses the MariaDB, MySQL, and PostgreSQL DB engines' built-in replication 
 functionality to create a special type of DB instance called a Read Replica from a 
 source DB instance. Updates made to the source DB instance are asynchronously copied
- to the Read Replica. 
- 
- You can reduce the load on your source DB instance by routing 
- read queries from your applications to the Read Replica. Using Read Replicas, you 
- can elastically scale out beyond the capacity constraints of a single DB instance 
- for read-heavy database workloads.
- 
- The Read Replica operates as a DB instance that allows only read-only connections.
-  Applications connect to a Read Replica the same way they do to any DB instance.
-   Amazon RDS replicates all databases in the source DB instance.
- 
+to the Read Replica. 
+
+You can reduce the load on your source DB instance by routing 
+read queries from your applications to the Read Replica. Using Read Replicas, you 
+can elastically scale out beyond the capacity constraints of a single DB instance 
+for read-heavy database workloads.
+
+The Read Replica operates as a DB instance that allows only read-only connections.
+Applications connect to a Read Replica the same way they do to any DB instance.
+Amazon RDS replicates all databases in the source DB instance.
+
 ## Tags
 
 Each Amazon RDS resource has a tag set, which contains all the tags that are 
 assigned to that Amazon RDS resource. A tag set can contain as many as 10 tags,
- or it can be empty. If you add a tag to an Amazon RDS resource that has the 
- same key as an existing tag on resource, the new value overwrites the old value.
+or it can be empty. If you add a tag to an Amazon RDS resource that has the 
+same key as an existing tag on resource, the new value overwrites the old value.
  
 Ket-Value limits:  
 * Key limit :  1 to 128 Unicode
@@ -82,8 +93,7 @@ Db subnet group defines which subnets and IP ranges the DB instance can use in V
 
 ## RDS Snapshot types
 
-* automated - Return all DB snapshots that have been automatically taken by Amazon
- RDS for my AWS account.
+* automated - Return all DB snapshots that have been automatically taken by Amazon RDS for my AWS account.
 * manual - Return all DB snapshots that have been taken by my AWS account.
 * shared - Return all manual DB snapshots that have been shared to my AWS account.
 * public - Return all DB snapshots that have been marked as public.
