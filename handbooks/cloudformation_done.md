@@ -1,5 +1,5 @@
 
-#CloudFormation
+# CloudFormation
 
 Number of templates  :  No limit  
 
@@ -69,7 +69,7 @@ Example of template
           }
         }
 
-####Stacks
+#### Stacks
 When you use AWS CloudFormation, you manage related resources as a single 
 unit called a stack. You create, update, and delete a collection of resources
  by creating, updating, and deleting stacks. All the resources in a stack are defined by the stack's AWS CloudFormation template. 
@@ -77,7 +77,7 @@ unit called a stack. You create, update, and delete a collection of resources
 Stack waiting: WaitCondition  
 
 
-####Change Sets
+#### Change Sets
 If you need to make changes to the running resources in a stack, you update 
 the stack. Before making changes to your resources, you can generate a change 
 set, which is summary of your proposed changes. Change sets allow you to see 
