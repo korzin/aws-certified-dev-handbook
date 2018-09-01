@@ -13,3 +13,14 @@ Amazon reserves the first four (4) IP addresses and the last one (1) IP
   a route table to send traffic to the corporate DC in London.
   
 You need to open port UDP 4500 to setup a VPN with a CGW behind a firewall or router.
+
+
+
+## Other 
+
+### Random 
+
+#### HTTP response meanings 
+
+409 - BucketAlreadyExists,InvalidBucketState,BucketNotEmpty,OperationAborted,RestoreAlreadyInProgress
+

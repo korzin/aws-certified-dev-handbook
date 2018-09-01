@@ -56,7 +56,10 @@ Your VPC includes a default security group whose initial rules are to deny all i
 
 ## VPC Endpoints
 
-A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. Instances in your VPC do not require public IP addresses to communicate with resources in the service. Traffic between your VPC and the other service does not leave the Amazon network.
+A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services 
+powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect
+connection. Instances in your VPC do not require public IP addresses to communicate with resources in the 
+service. Traffic between your VPC and the other service does not leave the Amazon network.
 
 Policy example to allow manage endpoints : 
 
@@ -131,20 +134,30 @@ CIDR blocks for IPv4 and IPv6 are treated separately. For example, a route with 
 CIDR of ::/0 for all IPv6 addresses.
 
 Every route table contains a local route for communication within the VPC over IPv4. If your VPC has more than one
- IPv4 CIDR block, your route tables contain a local route for each IPv4 CIDR block. If you've associated an IPv6 
- CIDR block with your VPC, your route tables contain a local route for the IPv6 CIDR block. You cannot modify or 
- delete these routes.
+IPv4 CIDR block, your route tables contain a local route for each IPv4 CIDR block. If you've associated an IPv6 
+CIDR block with your VPC, your route tables contain a local route for the IPv6 CIDR block. You cannot modify or 
+delete these routes.
 
 When you add an Internet gateway, an egress-only Internet gateway, a virtual private gateway, a NAT device, a 
 peering connection, or a VPC endpoint in your VPC, you must update the route table for any subnet that uses these
- gateways or connections.
+gateways or connections.
 
 There is a limit on the number of route tables you can create per VPC, and the number of routes you can add per
 route table. For more information, see Amazon VPC Limits.
-    
 
+You can't detach internet gateway when somebody use resources in VPC
+
+
+When you launch an instance into a VPC, we provide the instance with a private DNS hostname,
+and a public DNS hostname if the instance receives a public IPv4 address. 
+If domain-name-servers in your DHCP options is set to AmazonProvidedDNS, 
+the public DNS hostname takes the form **ec2-public-ipv4-address.compute-1.amazonaws.com for the us-east-1 region**,
+and **ec2-public-ipv4-address.region.compute.amazonaws.com for other regions.** 
+The private hostname takes the form **ip-private-ipv4-address.ec2.internal for the us-east-1 region**, 
+and **ip-private-ipv4-address.region.compute.internal for other regions.** 
+To change these to custom DNS hostnames, you must set domain-name-servers to a custom DNS server.
+     
 ### Main route table 
-
 
 ## Internet Gateway (IG)
 
@@ -159,7 +172,7 @@ If you require more than 10 Gbps bursts, you can distribute the
 workload by splitting your resources into multiple subnets, and 
 creating a NAT gateway in each subnet.
 
-### NAT instance
+### NAT Instance
 
 Each EC2 instance performs source/destination checks by default. 
 This means that the instance must be the source or destination of 
@@ -181,8 +194,8 @@ Communication over IPv6 is not supported for an inter-region VPC peering connect
 
 ## Direct link
 
-AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1-gigabit or
- 10-gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct 
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard **1-gigabit or
+ 10-gigabit Ethernet fiber-optic cable**. One end of the cable is connected to your router, the other to an AWS Direct 
  Connect router. With this connection in place, you can create virtual interfaces directly to public AWS services 
  (for example, to Amazon S3) or to Amazon VPC, bypassing Internet service providers in your network path. An AWS 
  Direct Connect location provides access to AWS in the region with which it is associated, and you can use a single 
@@ -200,3 +213,9 @@ AWS Direct Connect links your internal network to an AWS Direct Connect location
 * NACLs
 * SG
 * Os-level firewals
+
+
+## KMS
+
+KMS API Actions : Encrypt, GenerateDataKey, Decrypt
+

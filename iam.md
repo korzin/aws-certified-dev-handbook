@@ -1,5 +1,12 @@
 # Identity Access Management
 
+When a new AWS root account is created, it is best practice 
+to complete these 5 steps: 
+1. Delete your root access keys 
+2. Activate MFA on your root account 
+3. Create individual IAM users and User groups to assign permissions
+5. Apply an IAM password policy
+
 ## Policies
 
 ### Policy types

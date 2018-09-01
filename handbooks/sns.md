@@ -16,3 +16,4 @@ or email addresses. This allows for parallel asynchronous processing
 Amazon SNS guarantees that each message is delivered to Amazon SQS at least once
 
 
+Avalable endpoins include: HTTP, HTTPS, Email, Email-JSON, SQS, Webapp, mobile app, LAMBDA, SMS

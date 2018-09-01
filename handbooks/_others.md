@@ -82,4 +82,21 @@ Snowball has 10Gbps network interfaces with RJ45, SFP+ copper, and SFP+ optical 
 Job manifest unlock code is a 25-character code to unlock the job manifest file.
 
 
+## Elastic File System (EFS) 
+
+The storage capacity will increase and decrease as you add or remove files
+
+Benefits of EFS: 
+* Can be accessed by multiple EC2I at the same time, 
+* Multiple EC2i can access same data, 
+* Can be mounted to on-premise servers(see AWS Direct Connect) , 
+* Allow migrate data to and from on-premise servers, 
+* Can scale on peta-bytes in size, maintaining law latency, 
+* Only pay for what you use
+
+## API Gateway 
+
+Host names APIs in API Gateway, which are deployed to a specific
+region and of the {rest-api-id}.execute-api.{region}.amazonaws.com format.
+  
 

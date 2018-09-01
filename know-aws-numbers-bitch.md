@@ -28,6 +28,7 @@
 | SQS         | Max number of message metadata attributes | 10 |
 | SQS         | FIFO Queues: Max inflight messages | 20 000 | 
 | SQS         | Standart Queues: Max in-flight messages | 120 000 | 
+| SQS         | SQS long polling timeout(default, max,min) | 20,20,1 sec | 
 | -------  | ------------------------- | ------ |
 | SNS         | Token included in the confirmation message sent to end-points on a subscription request is valid for | 3 days | 
 | -------  | ------------------------- | ------ | 
@@ -52,7 +53,8 @@
 | -------  | ------------------------- | ------ |
 | IAM      | TODO | TODO | 
 | -------  | ------------------------- | ------ |
-| Lambda   | TODO | TODO | 
+| Lambda   | Lambda execution duration (default, min,max) | 3s,1s,300s | 
+| Lambda   |  |  | 
 | -------  | ------------------------- | ------ |
 | EC2      | Max key-pairs per region | 5000 |
 | EC2      | User data max size | 16kb | 
@@ -80,31 +82,12 @@
 | CloudFront | TTL (min for web, min for RTMP, max) | 0, 3600s, 100years | 
 | Snowball | Job manifest unlock code length | 25 characters | 
 | Snowball | Provided throughput | 10Gbps |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+| EC2 Auto Scaling | Launch configurations per region:               | 200  |
+| EC2 Auto Scaling | Auto Scaling groups per region:                 | 200  |
+| EC2 Auto Scaling | Scaling policies per Auto Scaling group:        | 50   |
+| EC2 Auto Scaling | Scheduled actions per Auto Scaling group:       | 125  |
+| EC2 Auto Scaling | SNS topics per Auto Scaling group:              | 10   |
+| Classic ELB | Connettion draining timeout (default, min, max) |  1s,6m,1h | 
+             
 
 

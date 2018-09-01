@@ -210,7 +210,8 @@ User data is limited to 16 KB. This limit applies to the data in raw form, not b
 
 * System Status Checks 
   
-   monitor the AWS systems required to use your instance to ensure they are working properly. These checks detect problems with your instance that require AWS involvement to repair.
+   monitor the AWS systems required to use your instance to ensure they are working properly.
+    These checks detect problems with your instance that require AWS involvement to repair.
    
    Examples : 
    * Loss of network connectivity
@@ -218,9 +219,17 @@ User data is limited to 16 KB. This limit applies to the data in raw form, not b
    * Software issues on the physical host
    * Hardware issues on the physical host 
 
-* Instance Status Checks - monitor the software and network configuration of your individual instance. These checks detect problems that require your involvement to repair. When an instance status check fails, typically you will need to address the problem yourself (for example by rebooting the instance or by making modifications in your operating system). 
+* Instance Status Checks 
+ 
+    Мonitor the software and network 
+configuration of your individual instance. These checks detect
+ problems that require your involvement to repair. When an instance
+  status check fails, typically you will need to address the 
+  problem yourself (for example by rebooting the instance or by 
+  making modifications in your operating system). 
 
-  Examples of problems that may cause instance status checks to fail include:
+  Examples of problems that may cause instance status checks to 
+  fail include:
   * Failed system status checks
   * Misconfigured networking or startup configuration
   * Exhausted memory
@@ -328,12 +337,40 @@ D2 and H1 instances suited for:
 
 If you require high processing capability, you'll benefit from using accelerated computing instances, which provide access to hardware-based compute accelerators such as Graphics Processing Units (GPUs) or Field Programmable Gate Arrays (FPGAs). Accelerated computing instances enable more parallelism for higher throughput on compute-intensive workloads.
 
-### Auto-scaling TODO
+### Auto-scaling (not only ec2 scaling, but mostly ec2)
+
+#### Supported resources to scale
+
+* Amazon EC2 Auto Scaling groups
+* Aurora DB clusters
+* DynamoDB global secondary indexes
+* DynamoDB tables
+* ECS services
+* Spot Fleet requests
+
+#### EC2 Auto-scaling 
+
+You can specify your launch configuration with multiple Auto Scaling groups.
+However, you can only specify one launch configuration for an Auto Scaling 
+group at a time, and you can't modify a launch configuration after you've
+created it. Therefore, if you want to change the launch configuration for 
+an Auto Scaling group, you must create a launch configuration and then
+update your Auto Scaling group with the new launch configuration.
+
 
 You can add an IAM role as a parameter in an Auto Scaling launch configuration 
 and create the Auto Scaling group with the EC2 launch configuration. All EC2 
 instances launched in an Auto Scaling group that is associated with the IAM role
  will have the role to perform the read/write operation.
+ 
+##### Health Check Grace Period
+
+Frequently, an Auto Scaling instance that has just come 
+into service needs to warm up before it can pass the 
+health check. Amazon EC2 Auto Scaling waits until the 
+health check grace period ends before checking the health 
+status of the instance. 
+
 ### Instance Purchasing Options
 
 #### Purchasing types: 
@@ -447,7 +484,6 @@ per Availability Zone per group.
 
 ### EBS Volumes
 
-
 To not lose temporal data (such as transaction logs on ec2i) you have to unmount ebs and only then shutdown ecwi
 
 An Amazon EBS volume is a durable, block-level storage device that you can attach to a single EC2 instance. 
@@ -552,6 +588,8 @@ information, see Supported Instance Types.
 ![EBS Volume lifecycle][https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/images/state_diagram_ebs.png]
 
 #### EBS Volumes types
+
+**Throughput Optimized HDD and Cold HDD can't be a boot volume**
 
 *  Solid-State Drives (SSD)
 * 	Hard disk Drives (HDD)
