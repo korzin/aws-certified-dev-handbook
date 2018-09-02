@@ -48,6 +48,7 @@
 | Route53  | Max number of domain names | 50  |
 | Route53  | Health check interval (default, min) | 30s, 10s |   |
 | Route53  | Max hosted zones | 500|   |
+| Route53  | Max data in archive | 40Tb|   |
 | -------  | ------------------------- | ------ |
 | RDS      | Max SQL Server size | 4Tb |
 | RDS      | Max number for read replicas | 5 |
@@ -56,7 +57,7 @@
 | RDS      | Backup retention period value(default, min, max) | 1d,1d,35d |
 | RDS      | Min and max size of Aurora DB | 10Gb, 64Tb |
 | -------  | ------------------------- | ------ |
-| IAM      | TODO | TODO | 
+| IAM      | Max roles per account  | 	1000 | 
 | STS      | DurationSeconds parameter which to specify the duration of the role session. Minimum duration:  | 15m |
 | -------  | ------------------------- | ------ |
 | Lambda   | Lambda execution duration (default, min,max) | 3s,1s,300s | 
