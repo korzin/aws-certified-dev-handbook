@@ -48,7 +48,7 @@
 | -------  | ------------------------- | ------ |
 | RDS      | Max SQL Server size | 4Tb |
 | RDS      | Max number for read replicas | 5 |
-| RDS      | Max number for Aurora read replicas | 5 |
+| RDS      | Max number for Aurora replicas | 15 |
 | RDS      | Max number of RDS DB instances | 40 | 
 | RDS      | Backup retention period value(default, min, max) | 1d,1d,35d |
 | RDS      | Min and max size of Aurora DB | 10Gb, 64Tb |
