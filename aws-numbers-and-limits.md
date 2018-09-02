@@ -21,6 +21,7 @@
 | SWF         | Max workflow history retention time | 90 days |
 | SWF         | SWF Request size | 1Mb | 
 | SQS         | Visibility period for a message (default, min, max)  |  30s,30s, 12h |
+| SQS         | Queue name max length |80 characters |
 | SQS         | Time after which message will be deleted(default, min, max) | 4d,1m,14d | 
 | SQS         | Max length of a receipt handle | 1,024 characters |
 | SQS         | FIFO Queues: Max messages per second without batching | 300 |
