@@ -20,6 +20,11 @@ Avalable endpoins include: HTTP, HTTPS, Email, Email-JSON, SQS, Webapp, mobile a
 
 SNS endpoint API: CreatePlatformEndPoint
 
+When you first register an app and mobile device with a notification service, 
+such as Apple Push Notification Service (APNS) and Google Cloud Messaging for
+ Android (GCM), **`device tokens or registration IDs`** are returned from the 
+ notification service
+
 ## API 
 
 AddPermission

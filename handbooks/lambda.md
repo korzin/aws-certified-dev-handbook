@@ -42,3 +42,29 @@ Lambda is priced based on number of requests and Duration
 of code execution considering memory that is allocated to the function.
 
 
+## API
+
+AddPermission
+CreateAlias
+CreateEventSourceMapping
+CreateFunction
+DeleteAlias
+DeleteEventSourceMapping
+DeleteFunction
+DeleteFunctionConcurrency
+GetAccountSettings
+GetAlias
+GetEventSourceMapping
+GetFunction
+GetFunctionConfiguration
+GetPolicy
+Invoke
+InvokeAsync
+ListAliases
+ListEventSourceMappings
+ListFunctions
+ListTags
+ListVersionsByFunction
+PublishVersion
+UpdateAlias
+UpdateFunctionCode

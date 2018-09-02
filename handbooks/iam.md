@@ -110,7 +110,27 @@ AWS Command Line Interface (AWS CLI) or one of the AWS SDKs to make requests to 
   learn how to sign requests yourself. For more information on this process read 
   this blog post: <a href="https://aws.amazon.com/blogs/security/how-to-use-the-rest-api-to-encrypt-s3-objects-by-using-aws-kms/" target="_blank">blog post</a>
   
+## Security Token Service
 
+Requested credentials of STS API call, contains: 
+* Sec. Token, 
+* Access Key ID, 
+* Secret Access Key
 
+### STS API
 
-  
+Actions:
+
+AssumeRole
+
+AssumeRoleWithSAML
+
+AssumeRoleWithWebIdentity
+
+DecodeAuthorizationMessage
+
+GetCallerIdentity
+
+GetFederationToken
+
+GetSessionToken

@@ -1,6 +1,7 @@
 
 ## CloudFront
 
+## Random facts about CloudFront
 134 Points of Presence (123 Edge Locations and 11 Regional Edge Caches
 
 
@@ -19,7 +20,22 @@ use RTMP distribution. RTMP can stream media files using Adobe Media Server usin
  Adobe Real-Time Messaging Protocol (RTMP). In addition, the source content must be an 
  Amazon S3 bucket.
 
+## Choosing Between Signed URLs and Signed Cookies
+CloudFront signed URLs and signed cookies provide the same basic functionality: they allow you to control who can access your content. If you want to serve private content through CloudFront and you're trying to decide whether to use signed URLs or signed cookies, consider the following.
 
+Use signed URLs in the following cases:
+
+You want to use an RTMP distribution. Signed cookies aren't supported for RTMP distributions.
+
+You want to restrict access to individual files, for example, an installation download for your application.
+
+Your users are using a client (for example, a custom HTTP client) that doesn't support cookies.
+
+Use signed cookies in the following cases:
+
+You want to provide access to multiple restricted files, for example, all of the files for a video in HLS format or all of the files in the subscribers' area of a website.
+
+You don't want to change your current URLs.
 
 ### Regional edge
 

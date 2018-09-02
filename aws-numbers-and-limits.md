@@ -45,6 +45,8 @@
 | Glacier  | Archive ID length | 138 bytes |
 | -------  | ------------------------- | ------ |
 | Route53  | Max number of domain names | 50  |
+| Route53  | Health check interval (default, min) | 30s, 10s |   |
+| Route53  | Max hosted zones | 500|   |
 | -------  | ------------------------- | ------ |
 | RDS      | Max SQL Server size | 4Tb |
 | RDS      | Max number for read replicas | 5 |
@@ -54,9 +56,10 @@
 | RDS      | Min and max size of Aurora DB | 10Gb, 64Tb |
 | -------  | ------------------------- | ------ |
 | IAM      | TODO | TODO | 
+| STS      | DurationSeconds parameter which to specify the duration of the role session. Minimum duration:  | 15m |
 | -------  | ------------------------- | ------ |
 | Lambda   | Lambda execution duration (default, min,max) | 3s,1s,300s | 
-| Lambda   |  |  | 
+| Lambda   | Concurrent executions | 1000 | 
 | -------  | ------------------------- | ------ |
 | EC2      | Max key-pairs per region | 5000 |
 | EC2      | User data max size | 16kb | 
@@ -68,7 +71,7 @@
 | DYNAMO   | Max length of partition key | 2048 bytes |
 | DYNAMO   | Max length of sort key | 1024 bytes | 
 | DYNAMO   | Max number that ListTables action can return | 100 |
-| DYNAMO   | Max throughput(reads/writes) | TODO |
+| DYNAMO   | Max throughput(reads/writes) | 3000 RCU and 1000 WCU |
 | DYNAMO   | Max number of tables per region | 256 |
 | DYNAMO   | Table name length restrictions | 3 < tableName < 255 | 
 | DYNAMO   | Attribute name length restrictions | 1 < attributeName < 64 | 

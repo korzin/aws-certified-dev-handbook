@@ -1,5 +1,20 @@
 # AWS General information
 
+## API 
+
+### Supported platforms by SDK
+
+* java
+* javascript (probably with node)
+* ruby
+* python
+* go
+* C++
+* ios
+* android
+* net
+* php
+
 ## Global infrastructure
 
 ## Networking (TOUGH PART)
@@ -30,4 +45,5 @@ to permit your federated users to access the AWS Management Console.
 #### HTTP response meanings 
 
 409 - BucketAlreadyExists,InvalidBucketState,BucketNotEmpty,OperationAborted,RestoreAlreadyInProgress
+
 

@@ -2,6 +2,16 @@
  
 ## Random facts (remember)
 
+You have configured for Route 53 and wish to configure failover options for your webservers. 
+ What is the sequence of events when failover happens? 
+ 
+ **ANSWER:**  Route 53 conducts a health check of your application.
+  If your application fails 4 consecutive health checks as an example,
+   it triggers the next event. Route 53 will disable the resource record 
+   for the failed endpoint and no longer serves these records.
+    The failover step ensures that traffic gets routed to health endpoints instead of the failed one.
+        
+
 HTTPS health checks test whether it’s possible to connect with
 the endpoint over SSL and whether the endpoint returns a valid 
 HTTP response code. However, they do not validate the SSL certificate 
@@ -20,6 +30,7 @@ To enable DNS Failover for an ELB endpoint, create an Alias record pointing
 to the ELB and set the “Evaluate Target Health” parameter to true.
 
 ## Record set
+
 ### CNAME vs Alias records 
 
 CNAME used to point foo.example.com to bar.example.com. With same right part of DNS name
@@ -29,6 +40,9 @@ An alias record appears as the record type that you
 specified when you created the record, such as A or AAAA. 
 
 CNAME is chargeable, Alias is not.
+
+Aliases differ from a CNAME record in that they are not visible to resolvers. 
+Resolvers only see the A record and the resulting IP address of the target record.
 
 ### Record Types
 
@@ -61,8 +75,8 @@ CNAME is chargeable, Alias is not.
 
 Latency based routing. 
    
-   You can route traffic based on the lowest network latency for your end users
-    so that your end users can experience a faster response time. You would use
-     this form of routing when you have resources that serve the same functions 
-     located in different availability zones or regions.
+You can route traff**ic based on the lowest network latency for your end users
+so that your end users can experience a faster response time. You would use
+ this form of routing when you have resources that serve the same functions 
+ located in different availability zones or regions.
 
