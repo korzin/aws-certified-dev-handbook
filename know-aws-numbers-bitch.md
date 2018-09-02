@@ -22,6 +22,7 @@
 | SWF         | SWF Request size | 1Mb | 
 | SQS         | Visibility period for a message (default, min, max)  |  30s,30s, 12h |
 | SQS         | Time after which message will be deleted(default, min, max) | 4d,1m,14d | 
+| SQS         | Max length of a receipt handle | 1,024 characters |
 | SQS         | FIFO Queues: Max messages per second without batching | 300 |
 | SQS         | FIFO Queues: Max messages per second with batching | 3000 |
 | SQS         | Standart Queues: Max messages per second | unlimited |
@@ -31,6 +32,7 @@
 | SQS         | SQS long polling timeout(default, max,min) | 20,20,1 sec | 
 | -------  | ------------------------- | ------ |
 | SNS         | Token included in the confirmation message sent to end-points on a subscription request is valid for | 3 days | 
+| SNS         | Max topics per account | 100,000 | 
 | -------  | ------------------------- | ------ | 
 | S3 | Max buckets per account     |   100      |           
 | S3 | Bucket name min and max length     |   3, 63         | 
@@ -42,7 +44,7 @@
 | Glacier  | How often Glacier prepares an inventory | every 24h |
 | Glacier  | Archive ID length | 138 bytes |
 | -------  | ------------------------- | ------ |
-| Route53  | TODO | TODO
+| Route53  | Max number of domain names | 50  |
 | -------  | ------------------------- | ------ |
 | RDS      | Max SQL Server size | 4Tb |
 | RDS      | Max number for read replicas | 5 |
@@ -87,7 +89,5 @@
 | EC2 Auto Scaling | Scaling policies per Auto Scaling group:        | 50   |
 | EC2 Auto Scaling | Scheduled actions per Auto Scaling group:       | 125  |
 | EC2 Auto Scaling | SNS topics per Auto Scaling group:              | 10   |
-| Classic ELB | Connettion draining timeout (default, min, max) | 6m,1s,1h | 
-             
-
-
+| Classic ELB | Connection draining timeout (default, min, max) | 6m,1s,1h | 
+            

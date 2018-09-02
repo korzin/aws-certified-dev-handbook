@@ -217,5 +217,34 @@ AWS Direct Connect links your internal network to an AWS Direct Connect location
 
 ## KMS
 
-KMS API Actions : Encrypt, GenerateDataKey, Decrypt
+KMS API Actions : **Encrypt, GenerateDataKey, Decrypt**
 
+CreateAlias				
+CreateGrant	
+CreateKey	
+Decrypt	
+DeleteAlias				
+DeleteImportedKeyMaterial	
+DescribeKey				
+DisableKey		
+DisableKeyRotation	
+EnableKey			
+EnableKeyRotation	
+Encrypt		
+GenerateDataKey		
+GenerateDataKeyWithoutPlaintext		
+GenerateRandom	
+GetKeyPolicy				
+GetKeyRotationStatus	
+GetParametersFImport	
+ImportKeyMaterial	
+ListAliases				
+ListGrants				
+ListKeyPolicies				
+ListKeys							
+PutKeyPolicy				
+ReEncrypt		
+RetireGrant				
+RevokeGrant			
+ScheduleKeyDeletion								
+UpdateAlias				

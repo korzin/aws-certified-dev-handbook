@@ -1,5 +1,9 @@
 # SQS
 
+## Message metadata
+
+Supported types include String, Number, and Binary. 
+
 ## URL
 
      https://sqs.us-east-2.amazonaws.com/123456789012/MyQueue

@@ -17,3 +17,31 @@ Amazon SNS guarantees that each message is delivered to Amazon SQS at least once
 
 
 Avalable endpoins include: HTTP, HTTPS, Email, Email-JSON, SQS, Webapp, mobile app, LAMBDA, SMS
+
+SNS endpoint API: CreatePlatformEndPoint
+
+## API 
+
+AddPermission
+ConfirmSubscription
+CreatePlatformApplication
+CreatePlatformEndpoint
+CreateTopic
+DeleteEndpoint
+DeletePlatformApplication
+DeleteTopic
+GetEndpointAttributes
+GetPlatformApplicationAttributes
+GetSubscriptionAttributes
+GetTopicAttributes
+ListSubscriptions
+ListSubscriptionsByTopic
+ListTopics
+Publish
+RemovePermission
+SetEndpointAttributes
+SetSMSAttributes
+SetSubscriptionAttributes
+SetTopicAttributes
+Subscribe
+Unsubscribe

@@ -19,8 +19,8 @@ the hostname like ‘www’. You cannot do the same with a CNAME record
 To enable DNS Failover for an ELB endpoint, create an Alias record pointing 
 to the ELB and set the “Evaluate Target Health” parameter to true.
 
-
-## CNAME vs Alias records 
+## Record set
+### CNAME vs Alias records 
 
 CNAME used to point foo.example.com to bar.example.com. With same right part of DNS name
 
@@ -30,4 +30,39 @@ specified when you created the record, such as A or AAAA.
 
 CNAME is chargeable, Alias is not.
 
-##
+### Record Types
+
+* A  : IPv4 
+* AAAA : IPv6
+* CAA : 
+   
+   A CAA record lets you specify which certificate authorities (CAs) are allowed to 
+   issue certificates for a domain or subdomain.
+   (docs ref: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html?shortFooter=true#CAAFormat) 
+* CNAME : 
+
+   Specify domain, such ass 'hostname.example.com' 
+* MX : 
+   
+   Used to specify email servers with priorities (e.g. '10 mail.example.com' ) 
+* NS :  
+
+   Identifies the name servers for the hosted zone (e.g. 'ns-1.example.com') 
+* PTR : the same as CNAME 
+* SOA : 
+
+   A start of authority (SOA) record provides information about a domain and 
+   the corresponding Amazon Route 53 hosted zone (e.g. ns-2048.awsdns-64.net hostmaster.awsdns.com 1 1 1 1 60) 
+
+
+## Routing
+
+### Random facts 
+
+Latency based routing. 
+   
+   You can route traffic based on the lowest network latency for your end users
+    so that your end users can experience a faster response time. You would use
+     this form of routing when you have resources that serve the same functions 
+     located in different availability zones or regions.
+

@@ -2,7 +2,7 @@
 
 ## Global infrastructure
 
-## Networking 
+## Networking (TOUGH PART)
 
 Amazon reserves the first four (4) IP addresses and the last one (1) IP
  address of every subnet for IP networking purposes.
@@ -14,7 +14,14 @@ Amazon reserves the first four (4) IP addresses and the last one (1) IP
   
 You need to open port UDP 4500 to setup a VPN with a CGW behind a firewall or router.
 
+### SAML 
 
+SAML stands for Security Assertion Markup Language.
+
+The AWS sign-in endpoint for SAML is https://signin.aws.amazon.com/saml
+
+You can configure your SAML 2.0-compliant IdP such as Active Directory 
+to permit your federated users to access the AWS Management Console.
 
 ## Other 
 
