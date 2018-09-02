@@ -1,3 +1,8 @@
+# SQS
+
+## URL
+
+     https://sqs.us-east-2.amazonaws.com/123456789012/MyQueue
 
 
 ## Limits 
