@@ -58,15 +58,15 @@
 | -------  | ------------------------- | ------ |
 | EC2      | Max key-pairs per region | 5000 |
 | EC2      | User data max size | 16kb | 
-| EC2      | How much cluster placement group offers Ethernet bandwidth connectivity | 10Dbps | 
-| EC2      | How much cluster placement group offer Enthernet bandwidth connectivity via Public IPs | 5Dbps | 
+| EC2      | How much cluster placement group offers Ethernet bandwidth connectivity | 10 Gbps | 
+| EC2      | How much cluster placement group offer Enthernet bandwidth connectivity via Public IPs | 5 Gbps | 
 | EC2      | Max number of EBS volumes that can be attached to EC2i (Linuc, Windows) | 40, 26
 | DYNAMO   | Max Query and Scan operation response size | 1Mb | 
 | DYNAMO   | Max item size | 400kb |
 | DYNAMO   | Max length of partition key | 2048 bytes |
 | DYNAMO   | Max length of sort key | 1024 bytes | 
 | DYNAMO   | Max number that ListTables action can return | 100 |
-| DYNAMO   | Max throughput(reads/writes) 
+| DYNAMO   | Max throughput(reads/writes) | TODO |
 | DYNAMO   | Max number of tables per region | 256 |
 | DYNAMO   | Table name length restrictions | 3 < tableName < 255 | 
 | DYNAMO   | Attribute name length restrictions | 1 < attributeName < 64 | 
@@ -77,7 +77,7 @@
 | CF       | Max number of parameters in template | 60  |
 | CF       | Max Stacks per region | 200 |
 | CF       | Max Templates per region | unlimited |
-| AWS      | Number of port you need to open
+| AWS      | Number of port you need to open |what is this about? |
 | CloudFront | Number of Point Of Presence, Edge Location, Edge Caches | 134,123,11 | 
 | CloudFront | TTL (min for web, min for RTMP, max) | 0, 3600s, 100years | 
 | Snowball | Job manifest unlock code length | 25 characters | 
@@ -87,7 +87,7 @@
 | EC2 Auto Scaling | Scaling policies per Auto Scaling group:        | 50   |
 | EC2 Auto Scaling | Scheduled actions per Auto Scaling group:       | 125  |
 | EC2 Auto Scaling | SNS topics per Auto Scaling group:              | 10   |
-| Classic ELB | Connettion draining timeout (default, min, max) |  1s,6m,1h | 
+| Classic ELB | Connettion draining timeout (default, min, max) | 6m,1s,1h | 
              
 
 
