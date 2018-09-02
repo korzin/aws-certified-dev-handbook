@@ -81,7 +81,7 @@
 | CF       | Max Templates per region | unlimited |
 | AWS      | Number of port you need to open |what is this about? |
 | CloudFront | Number of Point Of Presence, Edge Location, Edge Caches | 134,123,11 | 
-| CloudFront | TTL (min for web, min for RTMP, max) | 0, 3600s, 100years | 
+| CloudFront | TTL (dafault, min-for-web, min-for-RTMP, max) | 24h, 0, 3600s, 100years | 
 | Snowball | Job manifest unlock code length | 25 characters | 
 | Snowball | Provided throughput | 10Gbps |
 | EC2 Auto Scaling | Launch configurations per region:               | 200  |
